@@ -1,16 +1,13 @@
 package com.fuad.dao;
 
 import com.fuad.model.Status;
-import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-@Component
+@Service
 @Transactional
 public class StatusDAO {
     @Autowired
@@ -62,15 +59,15 @@ public class StatusDAO {
         return id;
     }
 
-    public List<Status> getAll(){
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Status", Status.class);
-        List<Status> statusList = query.list();
+//    public List<Status> getAll(){
+//        Query query = sessionFactory.getCurrentSession().createQuery("FROM Status", Status.class);
+//        List<Status> statusList = query.list();
+//
+//        return statusList;
+//    }
 
-        return statusList;
-    }
-
-    public List<Status> getAllByLocationId(Long locationId) {
-        List<Status> statusList = sessionFactory.getCurrentSession().createQuery("FROM Status WHERE locationId = :locationId", Status.class).setParameter("locationId", locationId).list();
-        return statusList;
-    }
+//    public List<Status> getAllByLocationId(Long locationId) {
+//        List<Status> statusList = sessionFactory.getCurrentSession().createQuery("FROM Status WHERE locationId = :locationId", Status.class).setParameter("locationId", locationId).list();
+//        return statusList;
+//    }
 }

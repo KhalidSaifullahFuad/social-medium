@@ -10,8 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class AppInitializer implements WebApplicationInitializer {
+
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) {
+
         // root config
         AnnotationConfigWebApplicationContext rootConfig = new AnnotationConfigWebApplicationContext();
         rootConfig.register(DBConfig.class);
