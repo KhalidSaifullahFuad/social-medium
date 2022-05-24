@@ -15,7 +15,7 @@
 
         <property name="hibernate.connection.url">jdbc:postgresql://localhost/social_medium</property>
 
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.connection.autocommit">true</property>
 
         <property name="hibernate.c3p0.min_size">5</property>
