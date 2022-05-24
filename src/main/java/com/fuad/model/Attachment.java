@@ -1,19 +1,18 @@
 package com.fuad.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-
+@Data
 @Entity
 @Table(name = "attachments")
 public class Attachment implements Serializable{
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "attachment_name")
@@ -25,35 +24,6 @@ public class Attachment implements Serializable{
     @Column(name = "attachment_type")
     private String getAttachmentType;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAttachmentName() {
-        return attachmentName;
-    }
-
-    public void setAttachmentName(String attachmentName) {
-        this.attachmentName = attachmentName;
-    }
-
-    public String getAttachmentPath() {
-        return attachmentPath;
-    }
-
-    public void setAttachmentPath(String attachmentPath) {
-        this.attachmentPath = attachmentPath;
-    }
-
-    public String getGetAttachmentType() {
-        return getAttachmentType;
-    }
-
-    public void setGetAttachmentType(String getAttachmentType) {
-        this.getAttachmentType = getAttachmentType;
-    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "attachment")
+    private User user;
 }

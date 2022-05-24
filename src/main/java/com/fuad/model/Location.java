@@ -1,37 +1,28 @@
 package com.fuad.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 
+@Data
 @Entity
 @Table(name = "locations")
 public class Location implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "location_name")
     private String locationName;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
+    private User user;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
+    private Status status;
 
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
 }
