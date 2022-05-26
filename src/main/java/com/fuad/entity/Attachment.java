@@ -1,4 +1,4 @@
-package com.fuad.model;
+package com.fuad.entity;
 
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class Attachment implements Serializable{
     private String attachmentPath;
 
     @Column(name = "attachment_type")
-    private String getAttachmentType;
+    private String attachmentType;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "attachment")
     private User user;

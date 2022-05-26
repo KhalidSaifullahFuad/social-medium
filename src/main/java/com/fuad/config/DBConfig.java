@@ -23,7 +23,7 @@ public class DBConfig {
     public LocalSessionFactoryBean getSessionFactory(){
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setConfigLocation(context.getResource("classpath:hbm.cfg.xml"));
-        sessionFactoryBean.setPackagesToScan("com.fuad.model");
+        sessionFactoryBean.setPackagesToScan("com.fuad.entity");
         return sessionFactoryBean;
     }
 

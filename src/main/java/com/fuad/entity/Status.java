@@ -1,4 +1,4 @@
-package com.fuad.model;
+package com.fuad.entity;
 
 import lombok.AccessLevel;
 import lombok.Data;
