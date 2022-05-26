@@ -1,6 +1,6 @@
 package com.fuad.dao;
 
-import com.fuad.model.User;
+import com.fuad.entity.User;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getById(Long id) {
-        User user = sessionFactory.getCurrentSession().get(User.class, id.toString());
+        User user = sessionFactory.getCurrentSession().get(User.class, id);
         return user;
     }
 

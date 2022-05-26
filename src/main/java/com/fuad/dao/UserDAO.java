@@ -1,6 +1,6 @@
 package com.fuad.dao;
 
-import com.fuad.model.User;
+import com.fuad.entity.User;
 
 import java.util.List;
 

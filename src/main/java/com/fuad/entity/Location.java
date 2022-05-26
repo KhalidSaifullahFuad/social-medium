@@ -1,9 +1,11 @@
-package com.fuad.model;
+package com.fuad.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -19,8 +21,8 @@ public class Location implements Serializable {
     @Column(name = "location_name")
     private String locationName;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
-    private User user;
+    @OneToMany(orphanRemoval = true, mappedBy = "location")
+    private List<User> users = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
     private Status status;

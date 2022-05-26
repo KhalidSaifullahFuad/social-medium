@@ -1,6 +1,6 @@
 package com.fuad.dao;
 
-import com.fuad.model.Location;
+import com.fuad.entity.Location;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -31,6 +31,21 @@ public class LocationDAO {
         return id;
     }
 
+    public Long update(Location location) {
+        Long id = -1L;
+        Session session = sessionFactory.getCurrentSession();
+
+        try {
+            session.saveOrUpdate(location);
+            id = location.getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.flush();
+
+        return id;
+    }
     public Location getById(Long id) {
         Location location = null;
         Session session = sessionFactory.getCurrentSession();
@@ -51,7 +66,7 @@ public class LocationDAO {
         Session session = sessionFactory.getCurrentSession();
 
         try {
-            Query query = session.createQuery("from Location where locationName = :name").setParameter("name", name);
+            Query query = session.createQuery("FROM Location WHERE locationName = :name").setParameter("name", name);
             location = (Location) query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
