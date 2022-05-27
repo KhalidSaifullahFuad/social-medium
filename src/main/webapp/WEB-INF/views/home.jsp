@@ -18,7 +18,38 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Hello World</h1>
+
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h4>Location</h4>
+            <a href="${pageContext.request.contextPath}/location/create" target="_blank">Create Location</a> <br>
+            <a href="${pageContext.request.contextPath}/location/list" target="_blank">Location List</a> <br><br>
+            <h4>User</h4>
+            <a href="${pageContext.request.contextPath}/user/create" target="_blank">Create User</a> <br>
+            <a href="${pageContext.request.contextPath}/user/maintain" target="_blank">User List</a> <br><br>
+            <h4>Status</h4>
+            <a href="${pageContext.request.contextPath}/status/create" target="_blank">Create Status</a> <br>
+            <a href="${pageContext.request.contextPath}/status/list" target="_blank">Status List</a> <br><br>
         </div>
     </div>
 </div>

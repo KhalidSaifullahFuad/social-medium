@@ -12,11 +12,11 @@
 
 <html>
 <head>
-    <title>${title}</title>
+    <title>Create Location</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 </head>
 <body>
-    <%--@elvariable id="location" type="com.fuad.model.Location"--%>
+<%--@elvariable id="location" type="com.fuad.entity.Location"--%>
     <form:form action="${pageContext.request.contextPath}/location/store" method="post" modelAttribute="location">
 
         Location:

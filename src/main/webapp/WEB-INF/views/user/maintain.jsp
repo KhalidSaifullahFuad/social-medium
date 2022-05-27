@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Users</title>
+    <title>User List</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 </head>
 <body>
@@ -28,12 +28,13 @@
         <tbody class="tbody">
             <c:forEach var="user" items="${userList}">
                 <tr>
-                <td class="td">${user.getId()}</td>
-                <td class="td">${user.getName()}</td>
-                <td class="td">${user.getEmail()}</td>
-                <td class="td">${user.getPassword()}</td>
-                <td class="td">${user.getLocation().getLocationName()}</td>
-                <td class="td">${user.getAttachment().getAttachmentPath()}</td>
+                    <td class="td">${user.getId()}</td>
+                    <td class="td">${user.getName()}</td>
+                    <td class="td">${user.getEmail()}</td>
+                    <td class="td">${user.getPassword()}</td>
+                    <td class="td">${user.getLocation().getLocationName()}</td>
+                    <td></td>
+<%--                <td class="td">${user.getAttachment().getAttachmentPath()}</td>--%>
                 </tr>
             </c:forEach>
         </tbody>

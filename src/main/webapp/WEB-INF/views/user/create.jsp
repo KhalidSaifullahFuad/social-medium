@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>User</title>
+    <title>Create User</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 </head>
 <body>
@@ -19,8 +19,8 @@
     <div class="row">
         <div class="col-md-9">
 
-            <%--@elvariable id="userDto" type="com.fuad.dto.UserDto"--%>
-            <form:form action="${pageContext.request.contextPath}/user/store" method="post" modelAttribute="userDto">
+            <%--@elvariable id="userDto" type="com.fuad.model.UserDto"--%>
+            <form:form action="${pageContext.request.contextPath}/user/store" method="post" modelAttribute="userDto" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <form:input type="text" cssClass="form-control" id="name" placeholder="Name" path="name"/>
@@ -43,9 +43,9 @@
 
                 <br>
 
-<%--                <form:input type="file" name="profile_photo" placeholder="Photo" path="attachment" capture=""/>--%>
+                <input type="file" name="image" />
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </form:form>
         </div>
     </div>

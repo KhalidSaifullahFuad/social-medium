@@ -8,9 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Status</title>
 </head>
 <body>
-
+    Title: ${status.getTitle()}<br>
+    Description: ${status.getDescription()}<br>
+    Location: ${status.getLocation().getLocationName()}<br>
+    Privacy: ${status.getPrivacy()}<br>
 </body>
 </html>
