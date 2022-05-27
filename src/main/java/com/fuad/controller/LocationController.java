@@ -1,7 +1,7 @@
 package com.fuad.controller;
 
 import com.fuad.dao.LocationDAO;
-import com.fuad.model.Location;
+import com.fuad.entity.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,11 +30,9 @@ public class LocationController {
 
     @PostMapping("/store")
     public String store(Model model, @ModelAttribute("location") Location location) {
+        locationDAO.insert(location);
 
         model.addAttribute("location", location);
-
-        location.setId(System.currentTimeMillis());
-        locationDAO.insert(location);
 
         return "location/show";
     }
