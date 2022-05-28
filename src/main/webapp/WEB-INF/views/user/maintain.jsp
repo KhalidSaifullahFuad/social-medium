@@ -33,8 +33,7 @@
                     <td class="td">${user.getEmail()}</td>
                     <td class="td">${user.getPassword()}</td>
                     <td class="td">${user.getLocation().getLocationName()}</td>
-                    <td></td>
-<%--                <td class="td">${user.getAttachment().getAttachmentPath()}</td>--%>
+                    <td class="td">${user.getAttachment().getAttachmentPath()}</td>
                 </tr>
             </c:forEach>
         </tbody>

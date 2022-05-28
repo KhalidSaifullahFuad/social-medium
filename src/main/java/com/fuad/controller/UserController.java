@@ -1,7 +1,9 @@
 package com.fuad.controller;
 
+import com.fuad.config.Utils;
 import com.fuad.dao.LocationDAO;
 import com.fuad.dao.UserDAO;
+import com.fuad.entity.Attachment;
 import com.fuad.model.UserDto;
 import com.fuad.entity.Location;
 import com.fuad.entity.User;
@@ -44,53 +46,39 @@ public class UserController {
         return new ModelAndView("user/create", "model", model);
     }
 
-    @PostMapping("/store")
-    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestParam(name = "image") MultipartFile file) {
+    @PostMapping(value = "/store")
+    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestPart("image") MultipartFile file) {
+
+        Location location = locationDAO.getByName(userDto.getLocation());
+
+        Attachment attachment = Utils.saveFile(file, 11L);
 
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
-
-        Location location = locationDAO.getByName(userDto.getLocation());
         user.setLocation(location);
-
-
-
+        user.setAttachment(attachment);
         userDAO.insert(user);
 
         location.getUsers().add(user);
-
         locationDAO.update(location);
+
 
         model.addAttribute("user", user);
 
         return "user/show";
     }
 
-    @RequestMapping(value="/show/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView show(@PathVariable(value="id") String id) {
+    @GetMapping(value = "/show/{id}")
+    public String show(Model model, @PathVariable(value = "id") String id) {
 
         User user = userDAO.getById(Long.parseLong(id));
 
-        Location location = user.getLocation();
-        System.out.println("Location: " + location.getLocationName());
+        model.addAttribute("user", user);
 
-
-        ModelAndView modelAndView = new ModelAndView("user/show");
-        modelAndView.addObject("user", user);
-
-        return modelAndView;
+        return "redirect:/user/show";
     }
-//    @PostMapping(value = "/show/{id}")
-//    public String store(Model model, @PathVariable("id") Long id) {
-//        User user = userDAO.getById(id);
-//
-//        System.out.println(user.getName());
-//        model.addAttribute("user", user);
-//
-//        return "user/show";
-//    }
 
     @PostMapping("/update")
     public String update(Model model, @ModelAttribute("user") User user) {
