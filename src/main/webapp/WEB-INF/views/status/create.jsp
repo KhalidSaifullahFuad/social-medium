@@ -20,7 +20,7 @@
         <div class="col-md-9">
 
             <%--@elvariable id="status" type="com.fuad.model.StatusModel"--%>
-            <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status">
+            <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <form:input type="text" cssClass="form-control" id="title" placeholder="" path="title"/>
@@ -36,6 +36,8 @@
                     <form:options items="${locationList}"/>
                 </form:select>
 
+                <br>
+
                 <form:select cssClass="dropdown" path="privacy">
                     <form:option selected="true" value="Select Privacy" disabled="true"/>
                     <form:options items="${privacyList}"/>
@@ -43,7 +45,7 @@
 
                 <br>
 
-                <%--                <form:input type="file" name="profile_photo" placeholder="Photo" path="attachment" capture=""/>--%>
+                <input type="file" name="images" multiple="multiple" accept="image/*"/>
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form:form>

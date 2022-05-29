@@ -1,17 +1,19 @@
 package com.fuad.controller;
 
+import com.fuad.config.Utils;
+import com.fuad.dao.AttachmentDAO;
 import com.fuad.dao.LocationDAO;
 import com.fuad.dao.StatusDAO;
+import com.fuad.entity.Attachment;
 import com.fuad.entity.Location;
 import com.fuad.entity.Status;
+import com.fuad.entity.User;
 import com.fuad.model.StatusModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -27,6 +29,9 @@ public class StatusController {
 
     @Autowired
     private LocationDAO locationDAO;
+
+    @Autowired
+    private AttachmentDAO attachmentDAO;
 
     @GetMapping("/create")
     public ModelAndView create(Model model) {
@@ -45,15 +50,43 @@ public class StatusController {
     }
 
     @PostMapping("/store")
-    public String store(Model model, @ModelAttribute("status") StatusModel statusModel) {
+    public String store(Model model, @ModelAttribute("status") StatusModel statusModel, @RequestParam("images") MultipartFile[] files) {
+
+        Location location = locationDAO.getByName(statusModel.getLocation());
+        List<Attachment> attachmentList = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+            System.out.println("File name: " + file.getOriginalFilename());
+
+            Attachment attachment = Utils.saveFile(file, file.getOriginalFilename());
+            if (attachment != null) {
+                attachmentList.add(attachment);
+            }
+        }
+
+        attachmentDAO.insertBulks(attachmentList);
 
         Status status = new Status();
         status.setTitle(statusModel.getTitle());
         status.setDescription(statusModel.getDescription());
         status.setPrivacy(statusModel.getPrivacy());
-        status.setLocation(locationDAO.getByName(statusModel.getLocation()));
+        status.setLocation(location);
+        status.setStatusAttachmentList(attachmentList);
 
         statusDAO.insert(status);
+
+        location.getStatuses().add(status);
+        locationDAO.update(location);
+
+        model.addAttribute("status", status);
+
+        return "redirect:/status/show/" + status.getId();
+    }
+
+    @GetMapping(value = "/show/{id}")
+    public String show(Model model, @PathVariable(value = "id") String id) {
+
+        Status status = statusDAO.getById(Long.parseLong(id));
 
         model.addAttribute("status", status);
 

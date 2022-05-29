@@ -32,8 +32,7 @@ public class StatusDAO {
     }
 
     public Status getById(Long id) {
-        Status status = sessionFactory.getCurrentSession().get(Status.class, id.toString());
-        return status;
+        return sessionFactory.getCurrentSession().get(Status.class, id);
     }
 
     public Long update(Status status) {
