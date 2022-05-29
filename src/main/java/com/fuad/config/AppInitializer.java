@@ -24,7 +24,7 @@ public class AppInitializer implements WebApplicationInitializer {
         servletConfig.register(ServletConfig.class);
 
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("servlet", new DispatcherServlet(servletConfig));
-        servletRegistration.setMultipartConfig(new MultipartConfigElement("/"));
+        servletRegistration.setMultipartConfig(new MultipartConfigElement("/", 2097152, 4194304, 50));
 
         FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
         multipartFilter.addMappingForUrlPatterns(null, true, "/*");
