@@ -24,7 +24,6 @@ public class Location implements Serializable {
     @OneToMany(orphanRemoval = true, mappedBy = "location")
     private List<User> users = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "location")
-    private Status status;
-
+    @OneToMany(orphanRemoval = true, mappedBy = "location")
+    private List<Status> statuses = new ArrayList<>();
 }

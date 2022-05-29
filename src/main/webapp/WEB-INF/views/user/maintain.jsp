@@ -13,19 +13,20 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 </head>
 <body>
-
+<div class="container-fluid">
     <table class="table table-bordered">
         <thead class="thead">
             <tr>
-            <th class="th">Id</th>
-            <th class="th">Name</th>
-            <th class="th">Email</th>
-            <th class="th">Password</th>
-            <th class="th">Location</th>
-            <th class="th">Attachment Path</th>
+                <th class="th">Id</th>
+                <th class="th">Name</th>
+                <th class="th">Email</th>
+                <th class="th">Password</th>
+                <th class="th">Location</th>
+                <th class="th">Attachment Path</th>
             </tr>
         </thead>
         <tbody class="tbody">
+            <h4>Users(${userList.size()})</h4>
             <c:forEach var="user" items="${userList}">
                 <tr>
                     <td class="td">${user.getId()}</td>
@@ -38,6 +39,6 @@
             </c:forEach>
         </tbody>
     </table>
-
+</div>
 </body>
 </html>

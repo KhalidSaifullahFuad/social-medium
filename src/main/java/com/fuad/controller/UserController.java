@@ -47,11 +47,11 @@ public class UserController {
     }
 
     @PostMapping(value = "/store")
-    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestPart("image") MultipartFile file) {
+    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) {
 
         Location location = locationDAO.getByName(userDto.getLocation());
 
-        Attachment attachment = Utils.saveFile(file, 11L);
+        Attachment attachment = Utils.saveFile(file, "99");
 
         User user = new User();
         user.setName(userDto.getName());
@@ -67,7 +67,7 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-        return "user/show";
+        return "redirect:/user/show/" + user.getId();
     }
 
     @GetMapping(value = "/show/{id}")
@@ -77,7 +77,7 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-        return "redirect:/user/show";
+        return "user/show";
     }
 
     @PostMapping("/update")

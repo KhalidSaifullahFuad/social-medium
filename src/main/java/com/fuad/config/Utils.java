@@ -12,8 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class Utils {
-    public static Attachment saveFile(MultipartFile file, Long userId) {
-        Attachment attachment = new Attachment();
+    public static Attachment saveFile(MultipartFile file, String userId) {
         Path rootLocation = Paths.get(System.getProperty("user.home") + "/social-community");
 
         if (!file.isEmpty()) {
@@ -30,16 +29,19 @@ public class Utils {
             }
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+                Attachment attachment = new Attachment();
 
                 attachment.setAttachmentName(fileName);
                 attachment.setAttachmentPath(destinationFile.toAbsolutePath().toString());
                 attachment.setAttachmentType(file.getContentType());
+
+                return attachment;
             }catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        return attachment;
+        return null;
     }
 
 }

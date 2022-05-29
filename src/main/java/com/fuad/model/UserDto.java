@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-    String name;
+    private String name;
 
-    String password;
+    private String password;
 
-    String email;
+    private String email;
 
-    String location;
+    private String location;
 
 }
