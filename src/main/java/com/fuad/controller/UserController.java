@@ -1,21 +1,21 @@
 package com.fuad.controller;
 
+import com.fuad.config.Properties;
 import com.fuad.config.Utils;
 import com.fuad.dao.LocationDAO;
-import com.fuad.dao.UserDAO;
+import com.fuad.dao.user.UserDAO;
 import com.fuad.entity.Attachment;
-import com.fuad.model.UserDto;
+import com.fuad.dto.UserDto;
 import com.fuad.entity.Location;
 import com.fuad.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +47,11 @@ public class UserController {
     }
 
     @PostMapping(value = "/store")
-    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) {
+    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) throws IOException {
 
         Location location = locationDAO.getByName(userDto.getLocation());
 
-        Attachment attachment = Utils.saveFile(file, "99");
+        Attachment attachment = Utils.saveFile(file, Properties.USER_FOLDER);
 
         User user = new User();
         user.setName(userDto.getName());
@@ -100,6 +100,7 @@ public class UserController {
     public String maintain(Model model) {
 
         List<User> userList = userDAO.getAll();
+
         model.addAttribute("userList", userList);
 
         return "user/maintain";
