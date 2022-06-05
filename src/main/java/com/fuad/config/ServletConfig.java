@@ -20,8 +20,15 @@ public class ServletConfig implements WebMvcConfigurer {
         // Register resource handler for -
 
         // IMAGES
-        registry.addResourceHandler("/images/**") // Relative paths
-                .addResourceLocations("/WEB-INF/resources/images/") // Actual resource locations
+        registry.addResourceHandler(
+                "/images/**",
+                            "/status/show/images/**",
+                            "/user/show/images/**"
+                ) // Relative paths
+                .addResourceLocations(
+                        "/WEB-INF/resources/images/",
+                        "file:///" + Properties.WRITE_PATH + "/"
+                ) // Actual resource locations
                 .setCachePeriod(999999999); // Cache period
 
         // CSS

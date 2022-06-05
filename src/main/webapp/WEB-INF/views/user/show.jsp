@@ -14,6 +14,6 @@
     Name: ${user.getName()}<br>
     Email: ${user.getEmail()}<br>
     Location: ${user.getLocation().getLocationName()}<br>
-    Attachment Path: ${user.getAttachment().getAttachmentPath()}<br>
+    Attachment Path: <img src="/images/${user.getAttachment().getAttachmentPath()}" alt="${user.getAttachment().getAttachmentPath()}"/> <br>
 </body>
 </html>

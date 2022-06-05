@@ -20,8 +20,8 @@
 
     <c:forEach var="image" items="${status.getStatusAttachmentList()}">
 <%--        <img src="${image.getAttachmentPath()}">--%>
-        <c:url var="temp" value="${image.getAttachmentPath()}"/>
-        <img src="${temp}" alt="${image.getAttachmentPath()}">
+<%--        <c:url var="temp" value="${image.getAttachmentPath()}"/>--%>
+        <img src=${image.getAttachmentPath()}" alt="${image.getAttachmentPath()}">
     </c:forEach>
     <br>
 </body>
