@@ -32,7 +32,7 @@ public class AttachmentDAO {
         return id;
     }
 
-    public void insertBulks(List<Attachment> attachments) {
+    public void insertBulk(List<Attachment> attachments) {
         Session session = sessionFactory.getCurrentSession();
         try {
             attachments.forEach(session::save);

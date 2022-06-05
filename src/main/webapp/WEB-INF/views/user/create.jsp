@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-9">
 
-            <%--@elvariable id="userDto" type="com.fuad.model.UserDto"--%>
+            <%--@elvariable id="userDto" type="com.fuad.dto.UserDto"--%>
             <form:form action="${pageContext.request.contextPath}/user/store" method="post" modelAttribute="userDto" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Name</label>

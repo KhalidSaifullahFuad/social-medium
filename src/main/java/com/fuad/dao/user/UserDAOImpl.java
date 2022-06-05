@@ -1,5 +1,6 @@
-package com.fuad.dao;
+package com.fuad.dao.user;
 
+import com.fuad.dao.user.UserDAO;
 import com.fuad.entity.User;
 
 import org.hibernate.Session;
@@ -14,6 +15,7 @@ import java.util.List;
 @Service
 @Transactional
 public class UserDAOImpl implements UserDAO {
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -33,11 +35,6 @@ public class UserDAOImpl implements UserDAO {
         return id;
     }
 
-    @Override
-    public User getById(Long id) {
-        User user = sessionFactory.getCurrentSession().get(User.class, id);
-        return user;
-    }
 
     @Override
     public Long update(User user) {
@@ -54,6 +51,12 @@ public class UserDAOImpl implements UserDAO {
         session.flush();
 
         return id;
+    }
+
+    @Override
+    public User getById(Long id) {
+        User user = sessionFactory.getCurrentSession().get(User.class, id);
+        return user;
     }
 
     @Override

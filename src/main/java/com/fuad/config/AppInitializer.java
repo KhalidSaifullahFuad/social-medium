@@ -23,12 +23,13 @@ public class AppInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext servletConfig = new AnnotationConfigWebApplicationContext();
         servletConfig.register(ServletConfig.class);
 
+        // Multipart Config
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("servlet", new DispatcherServlet(servletConfig));
         servletRegistration.setMultipartConfig(new MultipartConfigElement("/", 2097152, 4194304, 50));
 
+        // Multipart Filter Config
         FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
         multipartFilter.addMappingForUrlPatterns(null, true, "/*");
-
 
         // Load on StartUp
         servletRegistration.setLoadOnStartup(1);

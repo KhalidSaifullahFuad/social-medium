@@ -1,4 +1,4 @@
-package com.fuad.model;
+package com.fuad.dto;
 
 import lombok.Data;
 

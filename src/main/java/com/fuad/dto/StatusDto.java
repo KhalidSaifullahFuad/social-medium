@@ -1,9 +1,9 @@
-package com.fuad.model;
+package com.fuad.dto;
 
 import lombok.Data;
 
 @Data
-public class StatusModel {
+public class StatusDto {
     String title;
 
     String description;

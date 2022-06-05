@@ -23,7 +23,4 @@ public class Attachment implements Serializable{
 
     @Column(name = "attachment_type")
     private String attachmentType;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "attachment")
-    private User user;
 }
