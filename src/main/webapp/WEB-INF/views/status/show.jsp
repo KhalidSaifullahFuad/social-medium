@@ -19,9 +19,7 @@
     Attachment:
 
     <c:forEach var="image" items="${status.getStatusAttachmentList()}">
-<%--        <img src="${image.getAttachmentPath()}">--%>
-<%--        <c:url var="temp" value="${image.getAttachmentPath()}"/>--%>
-        <img src=${image.getAttachmentPath()}" alt="${image.getAttachmentPath()}">
+        <img src="/images/${image.getAttachmentPath()}" alt="" height="100px" width="100px" style="object-fit: cover"/>
     </c:forEach>
     <br>
 </body>

@@ -22,7 +22,7 @@
         <th class="th">Description</th>
         <th class="th">Privacy</th>
         <th class="th">Location</th>
-        <th class="th">Attachment Path</th>
+        <th class="th" colspan="2">Attachments</th>
     </tr>
     </thead>
     <tbody class="tbody">
@@ -33,8 +33,9 @@
             <td class="td">${status.getDescription()}</td>
             <td class="td">${status.getPrivacy()}</td>
             <td class="td">${status.getLocation().getLocationName()}</td>
-            <td></td>
-                <%--                <td class="td">${status.getAttachment().getAttachmentPath()}</td>--%>
+            <c:forEach var="image" items="${status.getStatusAttachmentList()}">
+                <td><img src="/images/${image.getAttachmentPath()}" alt="" height="100px" width="100px" style="object-fit: cover"/></td>
+            </c:forEach>
         </tr>
     </c:forEach>
     </tbody>

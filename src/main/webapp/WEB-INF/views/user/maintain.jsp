@@ -17,24 +17,24 @@
     <table class="table table-bordered">
         <thead class="thead">
             <tr>
+                <th class="th">Profile Photo</th>
                 <th class="th">Id</th>
                 <th class="th">Name</th>
                 <th class="th">Email</th>
                 <th class="th">Password</th>
                 <th class="th">Location</th>
-                <th class="th">Attachment Path</th>
             </tr>
         </thead>
         <tbody class="tbody">
             <h4>Users(${userList.size()})</h4>
             <c:forEach var="user" items="${userList}">
                 <tr>
+                    <td class="td"><img src="/images/${user.getAttachment().getAttachmentPath()}" alt="" height="50px" width="50px" style="object-fit: cover"/></td>
                     <td class="td">${user.getId()}</td>
                     <td class="td">${user.getName()}</td>
                     <td class="td">${user.getEmail()}</td>
                     <td class="td">${user.getPassword()}</td>
                     <td class="td">${user.getLocation().getLocationName()}</td>
-                    <td class="td">${user.getAttachment().getAttachmentPath()}</td>
                 </tr>
             </c:forEach>
         </tbody>
