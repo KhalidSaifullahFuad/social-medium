@@ -1,20 +1,15 @@
 package com.fuad.config;
 
 import com.fuad.entity.Attachment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class Utils {
-
-    @Autowired
-    private ServletContext servletContext;
+public class FileUtils {
 
     public static Attachment saveFile(MultipartFile file, String path) {
         Path rootLocation = Paths.get(Properties.WRITE_PATH + path);
@@ -42,6 +37,18 @@ public class Utils {
 
         return null;
     }
+
+    public static byte[] getFile(String path) {
+        Path rootLocation = Paths.get(Properties.READ_PATH + path);
+        try {
+            return Files.readAllBytes(rootLocation);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 //    public static Attachment saveFile(MultipartFile file, String path) throws IOException {
 //        Path rootLocation = Paths.get(System.getProperty("user.home") + "/social-community");

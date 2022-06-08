@@ -13,7 +13,7 @@
 <body>
     Name: ${user.getName()}<br>
     Email: ${user.getEmail()}<br>
-    Location: ${user.getLocation().getLocationName()}<br>
-    Attachment Path: <img src="/images/${user.getAttachment().getAttachmentPath()}" alt="${user.getAttachment().getAttachmentPath()}"/> <br>
+    Location: ${user.getLocationName()}<br>
+    Attachment Path: <img src="data:image/png;base64,${user.getImage()}" height="100px" width="100px" style="object-fit: cover"/> <br>
 </body>
 </html>

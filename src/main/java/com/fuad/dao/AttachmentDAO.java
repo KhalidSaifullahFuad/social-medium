@@ -42,4 +42,19 @@ public class AttachmentDAO {
         }
         session.flush();
     }
+
+    public Attachment getById(Long id) {
+        Attachment attachment = null;
+        Session session = sessionFactory.getCurrentSession();
+
+        try {
+            attachment = session.get(Attachment.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.flush();
+
+        return attachment;
+    }
 }

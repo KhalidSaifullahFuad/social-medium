@@ -1,13 +1,17 @@
 package com.fuad.controller;
 
 import com.fuad.config.Properties;
-import com.fuad.config.Utils;
+import com.fuad.config.FileUtils;
 import com.fuad.dao.LocationDAO;
 import com.fuad.dao.user.UserDAO;
+import com.fuad.dto.UserResponseDto;
 import com.fuad.entity.Attachment;
 import com.fuad.dto.UserDto;
 import com.fuad.entity.Location;
 import com.fuad.entity.User;
+
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -51,7 +56,7 @@ public class UserController {
 
         Location location = locationDAO.getByName(userDto.getLocation());
 
-        Attachment attachment = Utils.saveFile(file, Properties.USER_FOLDER);
+        Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
 
         User user = new User();
         user.setName(userDto.getName());
@@ -74,8 +79,17 @@ public class UserController {
     public String show(Model model, @PathVariable(value = "id") String id) {
 
         User user = userDAO.getById(Long.parseLong(id));
+        UserResponseDto userResponseDto = new UserResponseDto();
 
-        model.addAttribute("user", user);
+        BeanUtils.copyProperties(user, userResponseDto);
+
+        byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
+        String imgUrl = Base64.getEncoder().encodeToString(bytes);
+
+        userResponseDto.setLocationName(user.getLocation().getLocationName());
+        userResponseDto.setImage(imgUrl);
+
+        model.addAttribute("user", userResponseDto);
 
         return "user/show";
     }
