@@ -73,10 +73,8 @@ public class StatusController {
 
         statusDAO.insert(status);
 
-        location.getStatuses().add(status);
-        locationDAO.update(location);
-
-        model.addAttribute("status", status);
+//        location.getStatuses().add(status);
+//        locationDAO.update(location);
 
         return "redirect:/status/show/" + status.getId();
     }

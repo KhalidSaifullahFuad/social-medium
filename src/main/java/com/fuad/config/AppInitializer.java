@@ -25,7 +25,7 @@ public class AppInitializer implements WebApplicationInitializer {
 
         // Multipart Config
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("servlet", new DispatcherServlet(servletConfig));
-        servletRegistration.setMultipartConfig(new MultipartConfigElement("/", 2097152, 4194304, 50));
+        servletRegistration.setMultipartConfig(new MultipartConfigElement("/", 2097152, 4194304, 50)); // if this is not worked then set /tmp as location.
 
         // Multipart Filter Config
         FilterRegistration.Dynamic multipartFilter = servletContext.addFilter("multipartFilter", MultipartFilter.class);
