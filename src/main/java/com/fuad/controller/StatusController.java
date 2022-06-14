@@ -9,6 +9,7 @@ import com.fuad.entity.Attachment;
 import com.fuad.entity.Location;
 import com.fuad.entity.Status;
 import com.fuad.dto.StatusDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,16 +66,11 @@ public class StatusController {
         attachmentDAO.insertBulk(attachmentList);
 
         Status status = new Status();
-        status.setTitle(statusModel.getTitle());
-        status.setDescription(statusModel.getDescription());
-        status.setPrivacy(statusModel.getPrivacy());
+        BeanUtils.copyProperties(statusModel, status);
         status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
 
         statusDAO.insert(status);
-
-//        location.getStatuses().add(status);
-//        locationDAO.update(location);
 
         return "redirect:/status/show/" + status.getId();
     }
@@ -83,7 +79,6 @@ public class StatusController {
     public String show(Model model, @PathVariable(value = "id") String id) {
 
         Status status = statusDAO.getById(Long.parseLong(id));
-
         model.addAttribute("status", status);
 
         return "status/show";
