@@ -1,0 +1,37 @@
+body{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+label{
+    display: none;
+}
+
+.login-form{
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+form input{
+    background: var(--color-background-search);
+    padding: .7rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
+.btn{
+    margin-bottom: 1rem;
+}
+
+.goto-signup{
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
+}
+
+a{
+    color: var(--color-primary);
+}

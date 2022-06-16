@@ -117,6 +117,10 @@ i{
     cursor: pointer;
 }
 
+.hidden{
+    display: none;
+}
+
 .card{
     background-color: var(--color-background-card);
     border-radius: var(--card-border-radius);
