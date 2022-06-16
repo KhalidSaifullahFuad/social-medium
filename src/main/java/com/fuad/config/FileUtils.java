@@ -11,31 +11,21 @@ import java.nio.file.StandardCopyOption;
 
 public class FileUtils {
 
-    public static Attachment saveFile(MultipartFile file, String path) {
-        Path rootLocation = Paths.get(Properties.WRITE_PATH + path);
+    public static Attachment saveFile(MultipartFile file, String path) throws IOException {
 
-        if (!file.isEmpty()) {
-            String fileName = file.getOriginalFilename();
-            Path destinationFile = rootLocation.resolve(fileName);
+        if (file.isEmpty()) return null;
 
-            if (!destinationFile.toFile().exists()) {
-                destinationFile.toFile().mkdirs();
-            }
-            try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+        String fileName = file.getOriginalFilename();
+        Path destinationFile = Paths.get(Properties.WRITE_PATH + path + fileName);
 
-                Attachment attachment = new Attachment();
-                attachment.setAttachmentName(fileName);
-                attachment.setAttachmentPath(path + fileName);
-                attachment.setAttachmentType(file.getContentType());
+        Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
 
-                return attachment;
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        Attachment attachment = new Attachment();
+        attachment.setAttachmentName(fileName);
+        attachment.setAttachmentPath(path + fileName);
+        attachment.setAttachmentType(file.getContentType());
 
-        return null;
+        return attachment;
     }
 
     public static byte[] getFile(String path) {

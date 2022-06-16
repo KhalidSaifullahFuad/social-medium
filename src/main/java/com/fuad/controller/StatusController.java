@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +52,7 @@ public class StatusController {
     }
 
     @PostMapping("/store")
-    public String store(Model model, @ModelAttribute("status") StatusDto statusModel, @RequestParam("images") MultipartFile[] files) {
+    public String store(Model model, @ModelAttribute("status") StatusDto statusModel, @RequestParam("images") MultipartFile[] files) throws IOException {
 
         Location location = locationDAO.getByName(statusModel.getLocation());
         List<Attachment> attachmentList = new ArrayList<>();
