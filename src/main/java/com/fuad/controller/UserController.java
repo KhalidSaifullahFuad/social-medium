@@ -3,7 +3,7 @@ package com.fuad.controller;
 import com.fuad.config.Properties;
 import com.fuad.config.FileUtils;
 import com.fuad.dao.LocationDAO;
-import com.fuad.dao.user.UserDAO;
+import com.fuad.dao.UserDAO;
 import com.fuad.dto.UserResponseDto;
 import com.fuad.entity.Attachment;
 import com.fuad.dto.UserDto;
@@ -11,8 +11,10 @@ import com.fuad.entity.Location;
 import com.fuad.entity.User;
 
 
+import com.fuad.enums.Role;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,9 @@ public class UserController {
     @Autowired
     private LocationDAO locationDAO;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/create")
     public ModelAndView create(Model model) {
 
@@ -45,6 +50,8 @@ public class UserController {
             locationList.add(location.getLocationName());
         }
 
+        System.out.println(">>>>> "+passwordEncoder.encode("123"));
+
         model.addAttribute("locationList", locationList);
         model.addAttribute("userDto", new UserDto());
 
@@ -52,25 +59,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/store")
-    public String store(Model model, @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) throws IOException {
+    public String store(@ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) throws IOException {
 
         Location location = locationDAO.getByName(userDto.getLocation());
-
         Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
 
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole(Role.ROLE_USER);
         user.setLocation(location);
         user.setAttachment(attachment);
+
         userDAO.insert(user);
-
-        location.getUsers().add(user);
-        locationDAO.update(location);
-
-
-        model.addAttribute("user", user);
 
         return "redirect:/user/show/" + user.getId();
     }
@@ -102,13 +104,6 @@ public class UserController {
 
         return "user/show";
     }
-
-    @PostMapping("/delete")
-    public String update(Model model, @PathVariable("id") Long id) {
-
-        return "user/show";
-    }
-
 
     @GetMapping("/maintain")
     public String maintain(Model model) {
