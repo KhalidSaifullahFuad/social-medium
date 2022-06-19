@@ -22,7 +22,7 @@
         
         <div class="goto-signup">
             <div>Not registered?</div>
-            <a href="#">Create User</a></div>
+            <a href="${pageContext.request.contextPath}/user/create">Create User</a></div>
         </div>
     </form>
 </body>

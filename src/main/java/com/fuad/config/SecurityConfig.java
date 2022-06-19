@@ -27,18 +27,17 @@ public class SecurityConfig {
 
         // For in memory authentication
         // managerBuilder.inMemoryAuthentication().withUser("fuad").password("{noop}1234").roles("ADMIN");
-
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).httpBasic(withDefaults());
-        http
-                .authorizeRequests(auth -> auth
-                        .antMatchers("/resources/**", "/temp/**").permitAll()
-                        .antMatchers("/", "/login").permitAll()
-                        .anyRequest().authenticated()
-                )
+        return http
+                .authorizeRequests()
+                .antMatchers("/user/create","/css/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/location/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
+                .and()
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
@@ -47,8 +46,14 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login-process")
                         .defaultSuccessUrl("/")
                         .permitAll()
-                );
-        return http.build();
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .permitAll()
+                )
+                .build();
+//        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).httpBasic(withDefaults());
     }
 
     @Bean
