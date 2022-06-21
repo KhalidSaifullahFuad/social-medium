@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -41,12 +42,20 @@
                 </div>
             </nav>
 
-            <h4>Location</h4>
-            <a href="${pageContext.request.contextPath}/location/create" target="_blank">Create Location</a> <br>
-            <a href="${pageContext.request.contextPath}/location/list" target="_blank">Location List</a> <br><br>
+            <sec:authorize access="isAuthenticated()">
+                Welcome Back, <sec:authentication property="name"/>
+            </sec:authorize>
+
+            <sec:authorize access="hasRole('USER')">
+                <h4>Location</h4>
+                <a href="${pageContext.request.contextPath}/location/create" target="_blank">Create Location</a> <br>
+                <a href="${pageContext.request.contextPath}/location/list" target="_blank">Location List</a> <br><br>
+            </sec:authorize>
+
             <h4>User</h4>
             <a href="${pageContext.request.contextPath}/user/create" target="_blank">Create User</a> <br>
             <a href="${pageContext.request.contextPath}/user/maintain" target="_blank">User List</a> <br><br>
+
             <h4>Status</h4>
             <a href="${pageContext.request.contextPath}/status/create" target="_blank">Create Status</a> <br>
             <a href="${pageContext.request.contextPath}/status/list" target="_blank">Status List</a> <br><br>
