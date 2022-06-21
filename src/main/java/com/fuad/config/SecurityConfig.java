@@ -15,15 +15,21 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"com.fuad.service"})
+@ComponentScan(basePackages = {"com.fuad.config", "com.fuad.service"})
 public class SecurityConfig {
 
     @Autowired
     private UserService userService;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthSuccessHandler authSuccessHandler;
+
+    @Autowired
     public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
-        managerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        managerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder);
 
         // For in memory authentication
         // managerBuilder.inMemoryAuthentication().withUser("fuad").password("{noop}1234").roles("ADMIN");
@@ -32,32 +38,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeRequests()
-                .antMatchers("/user/create","/css/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/location/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
+                        // Permitting all static resources to be accessed publicly
+                    .authorizeRequests()
+                    .antMatchers("/images/**", "/css/**", "/js/**").permitAll()
+                    .antMatchers("/user/create").permitAll()
+                        // We are restricting endpoints for individual roles.
+                        // Only users with allowed roles will be able to access individual endpoints.
                 .and()
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .loginProcessingUrl("/login-process")
-                        .defaultSuccessUrl("/")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
-                        .permitAll()
-                )
-                .build();
+                    .authorizeRequests()
+                    .antMatchers("/location/**").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
+
+                        // configuring our login form
+                .and()
+                    .formLogin(form -> form
+                            .loginPage("/login")
+                            .permitAll()
+                            .usernameParameter("username")
+                            .passwordParameter("password")
+                            .loginProcessingUrl("/login-process")
+                            .successHandler(authSuccessHandler)
+                            .permitAll()
+                    )
+
+                    .logout(logout -> logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/login")
+                            .permitAll()
+                    )
+                    .build();
 //        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).httpBasic(withDefaults());
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
