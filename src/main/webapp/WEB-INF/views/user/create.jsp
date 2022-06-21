@@ -24,23 +24,26 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <form:input type="text" cssClass="form-control" id="name" placeholder="Name" path="name"/>
+                    <form:errors path="name" cssClass="text-danger"/>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <form:input type="email" cssClass="form-control" id="email" placeholder="Email" path="email"/>
+                    <form:errors path="email" cssClass="text-danger"/>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
                     <form:input type="password" cssClass="form-control" id="password" placeholder="Password" path="password"/>
+                    <form:errors path="password" cssClass="text-danger"/>
                 </div>
 
                 <form:select cssClass="dropdown" path="location">
                     <form:option selected="true" value="Select Location" disabled="true"/>
                     <form:options items="${locationList}"/>
                 </form:select>
-
+                <form:errors path="location" cssClass="text-danger"/>
                 <br>
 
                 <input type="file" name="image" accept="image/*"/>

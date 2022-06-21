@@ -17,10 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -59,8 +62,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/store")
-    public String store(@ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file) throws IOException {
+    @Validated
+    public String store(@Valid @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file, BindingResult br) throws IOException {
 
+        if (br.hasFieldErrors()) {
+            return "user/create";
+        }
         Location location = locationDAO.getByName(userDto.getLocation());
         Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
 
