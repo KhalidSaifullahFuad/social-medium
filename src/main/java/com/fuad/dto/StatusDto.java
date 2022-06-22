@@ -2,16 +2,19 @@ package com.fuad.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 public class StatusDto {
     String title;
 
+    @NotBlank(message = "Enter your status")
     String description;
 
+    @NotBlank(message = "Enter your location")
     String location;
 
-    String user;
-
+    @NotBlank(message = "Select privacy")
     String privacy;
 
     String attachmentPath;

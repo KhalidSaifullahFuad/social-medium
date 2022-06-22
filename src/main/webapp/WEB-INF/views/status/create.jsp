@@ -29,19 +29,21 @@
                 <div class="form-group">
                     <label for="description">Description</label>
                     <form:textarea cssClass="form-control" path="description"/>
+                    <form:errors path="description" cssClass="text-danger"/>
                 </div>
 
                 <form:select cssClass="dropdown" path="location">
                     <form:option selected="true" value="Select Location" disabled="true"/>
                     <form:options items="${locationList}"/>
                 </form:select>
-
+                <form:errors path="location" cssClass="text-danger"/>
                 <br>
 
                 <form:select cssClass="dropdown" path="privacy">
                     <form:option selected="true" value="Select Privacy" disabled="true"/>
                     <form:options items="${privacyList}"/>
                 </form:select>
+                <form:errors path="privacy" cssClass="text-danger"/>
 
                 <br>
 

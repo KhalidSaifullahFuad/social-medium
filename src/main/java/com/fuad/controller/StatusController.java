@@ -13,10 +13,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/status")
+@Validated
 public class StatusController {
 
     @Autowired
@@ -52,9 +56,11 @@ public class StatusController {
     }
 
     @PostMapping("/store")
-    public String store(Model model, @ModelAttribute("status") StatusDto statusModel, @RequestParam("images") MultipartFile[] files) throws IOException {
+    public String store(@Valid @ModelAttribute("status") StatusDto statusDto, BindingResult result, @RequestParam("images") MultipartFile[] files) throws IOException {
+        if (result.hasErrors())
+            return "status/create";
 
-        Location location = locationDAO.getByName(statusModel.getLocation());
+        Location location = locationDAO.getByName(statusDto.getLocation());
         List<Attachment> attachmentList = new ArrayList<>();
 
         for (MultipartFile file : files) {
@@ -67,7 +73,7 @@ public class StatusController {
         attachmentDAO.insertBulk(attachmentList);
 
         Status status = new Status();
-        BeanUtils.copyProperties(statusModel, status);
+        BeanUtils.copyProperties(statusDto, status);
         status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
 
