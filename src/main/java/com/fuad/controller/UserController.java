@@ -63,7 +63,7 @@ public class UserController {
 
     @PostMapping(value = "/store")
     @Validated
-    public String store(@Valid @ModelAttribute("userDto") UserDto userDto, @RequestParam("image") MultipartFile file, BindingResult br) throws IOException {
+    public String store(@Valid @ModelAttribute("userDto") UserDto userDto, BindingResult br, @RequestParam("image") MultipartFile file) throws IOException {
 
         if (br.hasFieldErrors()) {
             return "user/create";
