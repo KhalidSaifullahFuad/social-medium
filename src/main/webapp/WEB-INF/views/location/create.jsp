@@ -16,11 +16,12 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 </head>
 <body>
-<%--@elvariable id="location" type="com.fuad.entity.Location"--%>
+<%--@elvariable id="location" type="com.fuad.dto.LocationDto"--%>
     <form:form action="${pageContext.request.contextPath}/location/store" method="post" modelAttribute="location">
 
         Location:
         <form:input cssClass="form-control" path="locationName"/>
+        <form:errors path="locationName" cssClass="text-danger"/>
         <br/>
 
         <button type="submit" class="btn btn-primary">Create</button>
