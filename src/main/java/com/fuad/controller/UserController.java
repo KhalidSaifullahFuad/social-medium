@@ -53,8 +53,6 @@ public class UserController {
             locationList.add(location.getLocationName());
         }
 
-        System.out.println(">>>>> "+passwordEncoder.encode("123"));
-
         model.addAttribute("locationList", locationList);
         model.addAttribute("userDto", new UserDto());
 
@@ -68,6 +66,7 @@ public class UserController {
         if (br.hasFieldErrors()) {
             return "user/create";
         }
+
         Location location = locationDAO.getByName(userDto.getLocation());
         Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
 
@@ -112,14 +111,13 @@ public class UserController {
         return "user/show";
     }
 
-    @GetMapping("/maintain")
-    public String maintain(Model model) {
+    @GetMapping("/list")
+    public String list(Model model) {
 
         List<User> userList = userDAO.getAll();
-
         model.addAttribute("userList", userList);
 
-        return "user/maintain";
+        return "user/list";
     }
 }
 
