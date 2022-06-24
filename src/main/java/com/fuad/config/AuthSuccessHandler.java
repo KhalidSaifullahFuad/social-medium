@@ -28,13 +28,13 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         response.setStatus(HttpServletResponse.SC_OK);
 
 
-        if(authUser.getRole().toString().contains("ADMIN")) {
-            response.sendRedirect("/user/maintain");
-        } else {
-            response.sendRedirect("/user/show/"+authUser.getId());
-        }
+//        if(authUser.getRole().toString().contains("ADMIN")) {
+//            response.sendRedirect("/user/maintain");
+//        } else {
+//            response.sendRedirect("/user/show/"+authUser.getId());
+//        }
 
-//        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
-//        response.sendRedirect(savedRequest == null ? "/user/maintain" : savedRequest.getRedirectUrl());
+        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+        response.sendRedirect(savedRequest == null ? "/home" : savedRequest.getRedirectUrl());
     }
 }

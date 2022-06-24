@@ -51,10 +51,7 @@ public class User implements Serializable, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-
-        for(Role role : Role.values()) {
-            authorities.add(role::name);
-        }
+           authorities.add((GrantedAuthority) () -> role.name());
         return authorities;
     }
 
