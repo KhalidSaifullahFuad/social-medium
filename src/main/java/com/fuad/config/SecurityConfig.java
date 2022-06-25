@@ -46,7 +46,7 @@ public class SecurityConfig {
                         // Only users with allowed roles will be able to access individual endpoints.
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/location/**").hasAuthority("ADMIN")
+                    .antMatchers("/location/**").hasAuthority("ROLE_ADMIN")
                     .anyRequest().authenticated()
 
                         // configuring our login form

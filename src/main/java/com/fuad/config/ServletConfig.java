@@ -34,25 +34,25 @@ public class ServletConfig implements WebMvcConfigurer {
                         "/WEB-INF/resources/images/",
                         "file:///" + Properties.WRITE_PATH + "/"
                 ) // Actual resource locations
-                .setCachePeriod(999999999); // Cache period
+                .setCachePeriod(0); // Cache period
 
         // CSS
         registry
-                .addResourceHandler("/css/**") // Relative paths
-                .addResourceLocations("/WEB-INF/resources/css/") // Actual resource locations
-                .setCachePeriod(999999999); // Cache period
+                .addResourceHandler("/css/**")
+                .addResourceLocations("/WEB-INF/resources/css/")
+                .setCachePeriod(0);
 
         // JAVASCRIPT
         registry
-                .addResourceHandler("/js/**") // Relative paths
-                .addResourceLocations("/WEB-INF/resources/js/") // Actual resource locations
-                .setCachePeriod(999999999); // Cache period
+                .addResourceHandler("/js/**")
+                .addResourceLocations("/WEB-INF/resources/js/")
+                .setCachePeriod(0); // Cache period
 
         // Other template resource vendor files
         registry
-                .addResourceHandler("/vendor/**") // Relative paths
-                .addResourceLocations("/WEB-INF/resources/vendor/") // Actual resource locations
-                .setCachePeriod(999999999); // Cache period
+                .addResourceHandler("/vendor/**")
+                .addResourceLocations("/WEB-INF/resources/vendor/")
+                .setCachePeriod(0);
 
     }
 }

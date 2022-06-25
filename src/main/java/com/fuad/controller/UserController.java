@@ -74,7 +74,7 @@ public class UserController {
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         user.setLocation(location);
         user.setAttachment(attachment);
 
