@@ -46,7 +46,7 @@
                 Welcome Back, <sec:authentication property="name"/>
             </sec:authorize>
 
-            <sec:authorize access="hasRole('USER')">
+            <sec:authorize access="hasAuthority('ROLE_ADMIN')">
                 <h4>Location</h4>
                 <a href="${pageContext.request.contextPath}/location/create" target="_blank">Create Location</a> <br>
                 <a href="${pageContext.request.contextPath}/location/list" target="_blank">Location List</a> <br><br>
@@ -59,6 +59,12 @@
             <h4>Status</h4>
             <a href="${pageContext.request.contextPath}/status/create" target="_blank">Create Status</a> <br>
             <a href="${pageContext.request.contextPath}/status/list" target="_blank">Status List</a> <br><br>
+
+            <sec:authorize access="isAuthenticated()">
+                <a href="${pageContext.request.contextPath}/logout">
+                    <button class="btn btn-primary">Logout</button>
+                </a>
+            </sec:authorize>
         </div>
     </div>
 </div>
