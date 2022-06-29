@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  social_medium_web:
+    container_name: 'social-medium-server'
+    image: 'social_medium_image'
+    build: ./
+    ports:
+      - '8083:8080'
+    depends_on:
+      - social_medium_db
+    command: catalina.sh run
+
+    # Pass environment variables to the service
+    environment:
+      # The inside port will be used by the dependent services
+      SPRING_DATASOURCE_URL: jdbc:postgresql://social_medium_db:5432/social_medium
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SERVER_PORT: 8083
+      ACTIVE_PROFILE: dev
+    networks:
+      - social_medium_network
+
+  social_medium_db:
+    image: 'postgres'
+    container_name: 'social_community_db'
+    volumes:
+      - type: volume
+        source: db_data
+        target: "/Documents/docker-data/social-medium-db"
+    ports:
+      - '5433:5432'
+    environment:
+      - 'POSTGRES_PASSWORD=123456'
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_DB=social_medium'
+    networks:
+      - social_medium_network
+    extra_hosts:
+      - 'social_community_network:192.168.68.115'
+volumes:
+  db_data:
+networks:
+  social_medium_network:
