@@ -4,26 +4,28 @@ body{
     place-items: center;
 }
 
-label{
-    display: none;
-}
-
 .login-form{
     width: 440px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2rem;
+    padding: calc(var(--min-padding) * 1.5);
 }
-form input{
+.login-form input{
     background: var(--color-background-search);
     padding: .7rem 1rem;
-    margin-bottom: 1.5rem;
     border-radius: var(--border-radius);
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    /* transition: outline .1s; */
 }
 
-.btn{
-    margin-bottom: 1rem;
+.login-form input:focus{
+    outline: 0.125rem solid var(--color-primary);
+}
+
+.login-form input,
+.login-form .btn{
+    margin-bottom: calc(var(--padding) - 1%);
 }
 
 .goto-signup{
@@ -34,4 +36,37 @@ form input{
 
 a{
     color: var(--color-primary);
+}
+
+.error{
+    outline: 2px solid red;
+}
+
+[class*="error-msg"]{
+    display: none;
+    color: red;
+    font-size: .85rem;
+    padding-inline: .2rem;
+    margin-top: .5rem;
+}
+
+.alert{
+    background: var(--color-background-search);
+    font-size: .9rem;
+    font-weight: 500;
+    padding-inline: var(--min-padding);
+    padding-block: 0.8rem;
+    margin-bottom: calc(var(--padding) - 1%);
+    border-radius: var(--border-radius);
+}
+
+
+.alert-primary{
+    background: #CCE5FF;
+    color: var(--color-primary);
+}
+
+.alert-danger{
+    background: #F8D7DA;
+    color: #8a2b34;
 }

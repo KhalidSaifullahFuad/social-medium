@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+    @GetMapping()
+    public String root() {
+        return "redirect:/feed";
+    }
 
-    @GetMapping("/")
-    public String root(){
+    @GetMapping("/feed")
+    public String feed(){
         return "index";
     }
 

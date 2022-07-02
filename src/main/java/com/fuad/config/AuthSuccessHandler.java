@@ -18,7 +18,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         HttpSession session = request.getSession();
-//        User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User authUser = (User) authentication.getPrincipal();
 
         session.setAttribute("user", authUser);
@@ -35,6 +34,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 //        }
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
-        response.sendRedirect(savedRequest == null ? "/home" : savedRequest.getRedirectUrl());
+        response.sendRedirect(savedRequest == null?  "/feed" : savedRequest.getRedirectUrl());
+
     }
 }
