@@ -32,43 +32,33 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private UserDAO userDAO;
 
     @Autowired
-    private LocationDAO locationDAO;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/create")
-    public ModelAndView create(Model model) {
+    public String create(Model model) {
 
-        List<Location> locations = locationDAO.getAll();
-        List<String> locationList = new ArrayList<>();
-
-        for (Location location : locations) {
-            locationList.add(location.getLocationName());
-        }
-
-        model.addAttribute("locationList", locationList);
+        model.addAttribute("locationList", getAllLocation());
         model.addAttribute("userDto", new UserDto());
 
-        return new ModelAndView("user/create", "model", model);
+        return "user/create";
     }
 
     @PostMapping(value = "/store")
     @Validated
-    public String store(@Valid @ModelAttribute("userDto") UserDto userDto, BindingResult br, @RequestParam("image") MultipartFile file) throws IOException {
+    public String store(Model model, @Valid @ModelAttribute("userDto") UserDto userDto, BindingResult br, @RequestParam("image") MultipartFile file) throws IOException {
 
         if (br.hasFieldErrors()) {
-            return "user/create";
+            model.addAttribute("locationList", getAllLocation());
+            return "/user/create";
         }
 
         Location location = locationDAO.getByName(userDto.getLocation());
-        Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
 
         User user = new User();
         user.setName(userDto.getName());
@@ -76,7 +66,11 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(Role.ROLE_USER);
         user.setLocation(location);
-        user.setAttachment(attachment);
+
+        if(!file.isEmpty()) {
+            Attachment  attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
+            user.setAttachment(attachment);
+        }
 
         userDAO.insert(user);
 
@@ -91,12 +85,13 @@ public class UserController {
 
         BeanUtils.copyProperties(user, userResponseDto);
 
-        byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
-        String imgUrl = Base64.getEncoder().encodeToString(bytes);
-
         userResponseDto.setLocationName(user.getLocation().getLocationName());
-        userResponseDto.setImage(imgUrl);
 
+        if(user.getAttachment() != null) {
+            byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
+            String imgUrl = Base64.getEncoder().encodeToString(bytes);
+            userResponseDto.setImage(imgUrl);
+        }
         model.addAttribute("user", userResponseDto);
 
         return "user/show";
