@@ -10,6 +10,11 @@ services:
       - social_medium_db
     command: catalina.sh run
 
+    volumes:
+      - type: volume
+        source: app_static_contents
+        target: "/Documents/docker-data/static_data/social-community/"
+
     # Pass environment variables to the service
     environment:
       # The inside port will be used by the dependent services
@@ -40,5 +45,6 @@ services:
       - 'social_community_network:192.168.68.115'
 volumes:
   db_data:
+  app_static_contents:
 networks:
   social_medium_network:

@@ -32,7 +32,8 @@ public class ServletConfig implements WebMvcConfigurer {
                 )
                 .addResourceLocations(
                         "/WEB-INF/resources/images/",
-                        "file:///" + Properties.WRITE_PATH + "/"
+                        "file:///" + Properties.WRITE_PATH + "/",
+                         Properties.WRITE_PATH + "/"
                 ) // Actual resource locations
                 .setCachePeriod(0); // Cache period
 

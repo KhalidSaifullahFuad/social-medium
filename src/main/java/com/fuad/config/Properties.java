@@ -1,8 +1,8 @@
 package com.fuad.config;
 
 public class Properties {
-    public static final String WRITE_PATH = System.getProperty("user.home") + "/social-community/"; // user.home is the path to the user's home directory
-    public static final String READ_PATH = System.getProperty("user.home") + "/social-community/"; // same as WRITE_PATH but for better reading
+    public static final String WRITE_PATH = "app_static_contents:/"; //System.getProperty("user.home") + "/social-community/"; // user.home is the path to the user's home directory
+    public static final String READ_PATH = "app_static_contents:/"; //System.getProperty("user.home") + "/social-community/"; // same as WRITE_PATH but for better reading
 
     public static final String USER_FOLDER = "user/"; // for saving profile photos in different folders
     public static final String STATUS_FOLDER = "status/"; // for saving status files in different folders
