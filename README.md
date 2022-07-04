@@ -2,18 +2,18 @@
 
 <p align="center">
   <a href="" rel="noopener">
-  <img src="https://user-images.githubusercontent.com/64584169/177029712-3c1f4e7b-66c4-42e4-8fc4-c3c078ca3caf.svg" height="100" alt="Socially logo"></a>
+  <img src="https://user-images.githubusercontent.com/64584169/177189408-d92cb113-108e-4429-bc07-d2fd44e4173d.svg" height="100" alt="Socially logo"></a>
 </p>
 
-<h1 align="center">Socially</h3>
+<h1 align="center">SOCIALLY</h3>
 
 <br>
 
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/KhalidSaifullahFuad/WORDLE.svg)](https://github.com/KhalidSaifullahFuad/social-medium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/KhalidSaifullahFuad/WORDLE.svg)](https://github.com/KhalidSaifullahFuad/social-medium/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/khalidsaifullahfuad/social-medium.svg)](https://github.com/khalidsaifullahfuad/social-medium/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/khalidsaifullahfuad/social-medium.svg)](https://github.com/khalidsaifullahfuad/social-medium/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -44,6 +44,9 @@ Socially is a social media application like facebook,twitter etc it helps users 
 
 ## 🎥 Demo / Working <a name = "demo"></a>
 
+![screely-1656951438956](https://user-images.githubusercontent.com/64584169/177191274-c6e7a90c-e423-4ab6-b8eb-3181d02ecf2a.png)
+
+![screely-1656951640449](https://user-images.githubusercontent.com/64584169/177191645-37bf4dec-9d68-4151-a72e-15dfb3955619.png)
 
 ## ✨ Features <a name = "features"></a>
 
@@ -74,22 +77,22 @@ Socially is a social media application like facebook,twitter etc it helps users 
   - [dev-rashed-alam/Social-Community](https://github.com/dev-rashed-alam/social-community)
   - [NameAlamin/Social-Community](https://github.com/NameAlamin/build_social_community_using_spring)
 - Articles
-  - [Introduction to Spring Security Taglibs | Baeldung](https://www.baeldung.com/spring-security-taglibs))
-  - [Spring MVC + Spring Security — In memory User Details Configuration (Security Part — 1)](https://mainul35.medium.com/spring-mvc-spring-security-in-memory-user-details-configuration-90d106b53d23)
-  - [Spring MVC + Spring Security — User Details from JDBC (Security Part — 2)](https://mainul35.medium.com/spring-mvc-spring-security-user-details-from-jdbc-security-part-2-dcb44705d1b5)
-  - [Spring Security — Demonstrating Custom Authentication Success Handler](https://mainul35.medium.com/spring-security-demonstrating-custom-authentication-success-handler-3b6fcb572a53)
-  - [Spring Security — Configuring 403 / Custom Access Denied Page](https://mainul35.medium.com/spring-security-configuring-403-custom-access-denied-page-fc1526c2806d)
-  - https://medium.com/@vishal.sharma./deploy-a-sample-war-java-application-on-docker-25729d4840d5
-  - https://docs.spring.io/spring-security/site/docs/4.1.3.RELEASE/guides/html5/hellomvc-javaconfig.html
-  - https://hibernate.org/validator/documentation/getting-started/
-  - https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
-  - https://www.javatpoint.com/spring-mvc-validation
-  - https://www.javatpoint.com/example-of-jsp-custom-tag
-  - https://stackoverflow.com/questions/29878055/400-bad-request-when-validation-model-attribute-with-spring-mvc
-  - https://www.baeldung.com/spring-server-sent-events
-  - https://www.baeldung.com/spring-security-login
-  - https://www.baeldung.com/spring-security-expressions
-  - https://www.baeldung.com/spring-aop
+  - [Spring Security - In memory User Details Configuration | Medium](https://mainul35.medium.com/spring-mvc-spring-security-in-memory-user-details-configuration-90d106b53d23)
+  - [Spring Security - User Details from JDBC | Medium](https://mainul35.medium.com/spring-mvc-spring-security-user-details-from-jdbc-security-part-2-dcb44705d1b5)
+  - [Spring Security - Demonstrating Custom Authentication Success Handler | Medium](https://mainul35.medium.com/spring-security-demonstrating-custom-authentication-success-handler-3b6fcb572a53)
+  - [Spring Security - Configuring 403 / Custom Access Denied Page | Medium](https://mainul35.medium.com/spring-security-configuring-403-custom-access-denied-page-fc1526c2806d)
+  - [Deploy a sample WAR (Java) Application on Docker | Medium](https://medium.com/@vishal.sharma./deploy-a-sample-war-java-application-on-docker-25729d4840d5)
+  - [Spring MVC Validation | JavaTPoint](https://www.javatpoint.com/spring-mvc-validation)
+  - [Example of JSP Custom Tag | JavaTPoint](https://www.javatpoint.com/example-of-jsp-custom-tag)
+  - [Introduction to Spring Security Taglibs | Baeldung](https://www.baeldung.com/spring-security-taglibs)
+  - [Server Sent Events | Baeldung](https://www.baeldung.com/spring-server-sent-events)
+  - [Spring Security Login | Baeldung](https://www.baeldung.com/spring-security-login)
+  - [Spring Security Expression | Baeldung](https://www.baeldung.com/spring-security-expressions)
+  - [Spring AOP | Baeldung](https://www.baeldung.com/spring-aop)
+  - [Spring MVC Security Java Config](https://docs.spring.io/spring-security/site/docs/4.1.3.RELEASE/guides/html5/hellomvc-javaconfig.html)
+  - [Getting started with Hibernate Validator](https://hibernate.org/validator/documentation/getting-started/)
+  - [Spring Security without the WebSecurityConfigurerAdapter](https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)
+  - [400 Bad request when validation Model Attribute with Spring MVC](https://stackoverflow.com/questions/29878055/400-bad-request-when-validation-model-attribute-with-spring-mvc)
 - Youtube Videos
   - [Spring Boot WebSocket: Chat Example](https://youtu.be/-ao3pX-UhQc)
   - [Spring Boot with Angular Using SockJS](https://youtu.be/dh_mAphaBU4)
