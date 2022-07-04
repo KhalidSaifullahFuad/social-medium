@@ -40,8 +40,8 @@ public class SecurityConfig {
         return http
                         // Permitting all static resources to be accessed publicly
                     .authorizeRequests()
-                    .antMatchers("/images/**", "/css/**", "/js/**").permitAll()
-                    .antMatchers("/user/create").permitAll()
+                    .antMatchers("/**", "/images/**", "/css/**", "/js/**").permitAll()
+                    .antMatchers("/user/create", "/user/store").permitAll()
                         // We are restricting endpoints for individual roles.
                         // Only users with allowed roles will be able to access individual endpoints.
                 .and()

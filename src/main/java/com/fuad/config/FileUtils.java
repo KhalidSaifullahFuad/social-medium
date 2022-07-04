@@ -16,9 +16,12 @@ public class FileUtils {
         if (file.isEmpty()) return null;
 
         String fileName = file.getOriginalFilename();
-        Path destinationFile = Paths.get(Properties.WRITE_PATH + path + fileName);
-
-        Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
+        var folder = new File(Properties.WRITE_PATH + path);
+        if(!folder.exists()){
+            folder.mkdirs();
+            Path destinationFile = Paths.get(Properties.WRITE_PATH + path + fileName);
+            Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
+        }
 
         Attachment attachment = new Attachment();
         attachment.setAttachmentName(fileName);

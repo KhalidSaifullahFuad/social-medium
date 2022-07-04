@@ -1,5 +1,6 @@
 package com.fuad.controller;
 
+import com.fuad.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
