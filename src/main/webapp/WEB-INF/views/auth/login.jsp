@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <title>LogIn</title>
 
@@ -8,20 +9,28 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 
+<fmt:setBundle basename="messages" />
+<fmt:message key="message.badCredentials" var="worngUserAndPass" />
+<fmt:message key="message.usernameRequired" var="noUser" />
+<fmt:message key="message.passwordRequired" var="noPass" />
+<fmt:message key="message.nameAndPassRequired" var="noUserAndPass" />
+<fmt:message key="message.loginError" var="loginErr" />
+<fmt:message key="message.logoutSuccess" var="logoutSucc" />
+
 
 <form class="login-form card" method="post" action="${pageContext.request.contextPath}/login-process">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
     <c:if test="${param.error!=null}">
-        <div class="alert alert-danger">Invalid Username and Password.</div>
+        <div class="alert alert-danger">${worngUserAndPass}</div>
     </c:if>
 
     <c:if test="${param.logout!=null}">
-        <div class="alert alert-primary">Successfully Logged out.</div>
+        <div class="alert alert-primary">${logoutSucc}</div>
     </c:if>
 
     <sec:authorize access="isAuthenticated()">
-        <div class="alert alert-primary">You are already logged in.</div>
+        <div class="alert alert-primary">${loginErr}</div>
     </sec:authorize>
 
 
@@ -52,14 +61,14 @@
 
             if(username === '' && password === ''){
                 $('#username, #password').addClass('error');
-                setAlert("Please enter your Username and password.");
+                setAlert("${noUserAndPass}.");
             }else if(username === ''){
                 $('#username').addClass('error');
-                setAlert("Enter your Username.");
+                setAlert("${noUser}");
 
             }else if(password === ''){
                 $('#password').addClass('error');
-                setAlert("Enter your Password.");
+                setAlert("${noPass}");
             }else{
                 $('.login-form').submit();
             }
