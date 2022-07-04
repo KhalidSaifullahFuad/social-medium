@@ -42,7 +42,7 @@ services:
     networks:
       - social_medium_network
     extra_hosts:
-      - 'social_community_network:192.168.68.115'
+      - 'social_community_network:192.168.1.102'
 volumes:
   db_data:
   app_static_contents:

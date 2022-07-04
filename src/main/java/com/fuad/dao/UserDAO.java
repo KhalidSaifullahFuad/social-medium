@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
 
     public Long insert(User user) {
@@ -25,6 +29,7 @@ public class UserDAO {
         Session session = sessionFactory.getCurrentSession();
 
         try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             id = (Long) session.save(user);
         } catch (Exception e) {
             e.printStackTrace();

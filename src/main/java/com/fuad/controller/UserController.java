@@ -63,7 +63,7 @@ public class UserController extends BaseController{
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(userDto.getPassword());
         user.setRole(Role.ROLE_USER);
         user.setLocation(location);
 
