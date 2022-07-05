@@ -66,7 +66,7 @@ Socially is a social media application like facebook,twitter etc it helps users 
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@khalidsaifullahfuad](https://github.com/khalidsaifullahfuad) - Coder, designer, and maintainer
-- [@mainul35](htpps://github.com/mainul35) - Mentor
+- [@mainul35](https://github.com/mainul35) - Mentor
 
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
