@@ -1,29 +1,25 @@
 package com.fuad.controller;
 
-import com.fuad.dao.UserDAO;
-import com.fuad.entity.User;
-import com.fuad.enums.Role;
+import com.fuad.dao.LocationDAO;
+import com.fuad.entity.Location;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AuthenticationController {
+public class AuthenticationController extends BaseController {
 
-    private final UserDAO userDAO;
-
-    public AuthenticationController(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
 
     @GetMapping("/login")
-    public String login(){
-        var user = new User();
-        user.setName("Admin");
-        user.setEmail("admin@gmail.com");
-        user.setPassword("secret");
-        user.setRole(Role.ROLE_ADMIN);
-        userDAO.insert(user);
-        return "auth/login";
+    public String login(Model model) {
+
+        if(userDAO.getAll().size() == 0){
+            createDemoUser();
+            model.addAttribute("demoUser", "admin");
+        }
+
+        return "login";
     }
 
     @GetMapping("/logout")

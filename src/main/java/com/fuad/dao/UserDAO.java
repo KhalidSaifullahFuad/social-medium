@@ -23,7 +23,6 @@ public class UserDAO {
     private PasswordEncoder passwordEncoder;
 
 
-
     public Long insert(User user) {
         Long id = -1L;
         Session session = sessionFactory.getCurrentSession();
@@ -58,34 +57,24 @@ public class UserDAO {
     }
 
     public User getById(Long id) {
-        User user = sessionFactory.getCurrentSession().get(User.class, id);
+        User user = sessionFactory.getCurrentSession().load(User.class, id);
         return user;
     }
 
     public User getByUsername(String username) {
-        User user = sessionFactory.getCurrentSession()
+        List<User> users = sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE name = :username", User.class)
                 .setParameter("username", username)
-                .getSingleResult();
-        return user;
+                .getResultList();
+        return users.size() > 0 ? users.get(0) : null;
     }
 
     public User getByEmail(String email) {
-        User user = sessionFactory.getCurrentSession()
+        List<User> users = sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE email = :email", User.class)
                 .setParameter("email", email)
-                .getSingleResult();
-        return user;
-    }
-
-    public Long delete(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        User user = session.get(User.class, id.toString());
-
-        session.delete(user);
-        session.flush();
-
-        return id;
+                .getResultList();
+        return users.size() > 0 ? users.get(0) : null;
     }
 
     public List<User> getAll() {
@@ -95,7 +84,10 @@ public class UserDAO {
     }
 
     public List<User> getAllByLocationId(Long locationId) {
-        List<User> userList = sessionFactory.getCurrentSession().createQuery("FROM User WHERE locationId = :locationId", User.class).setParameter("locationId", locationId).list();
+        List<User> userList = sessionFactory.getCurrentSession()
+                .createQuery("FROM User WHERE locationId = :locationId", User.class)
+                .setParameter("locationId", locationId)
+                .getResultList();
         return userList;
     }
 
