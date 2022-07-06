@@ -53,12 +53,12 @@ public class LocationController {
         return "location/show";
     }
 
-    @GetMapping("/list")
-    public String list(Model model) {
+    @GetMapping("/all")
+    public String all(Model model) {
 
         List<Location> locationList = locationDAO.getAll();
         model.addAttribute("locationList", locationList);
 
-        return "location/list";
+        return "location/locations";
     }
 }

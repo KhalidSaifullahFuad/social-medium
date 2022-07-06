@@ -1,5 +1,3 @@
-
-
 <section class=locations">
     <div class="location-list location-gri card">
         <div class="location">

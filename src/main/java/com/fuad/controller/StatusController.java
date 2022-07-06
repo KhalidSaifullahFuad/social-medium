@@ -40,7 +40,7 @@ public class StatusController {
     private AttachmentDAO attachmentDAO;
 
     @GetMapping("/create")
-    public ModelAndView create(Model model) {
+    public String create(Model model) {
         List<Location> locations = locationDAO.getAll();
         List<String> locationList = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class StatusController {
         model.addAttribute("privacyList", Arrays.asList("Public", "Private"));
         model.addAttribute("status", new StatusDto());
 
-        return new ModelAndView("status/create", "model", model);
+        return "status/create";
     }
 
     @PostMapping("/store")
@@ -91,12 +91,12 @@ public class StatusController {
         return "status/show";
     }
 
-    @GetMapping("/list")
-    public String maintain(Model model) {
+    @GetMapping("/all")
+    public String all(Model model) {
 
         List<Status> statusList = statusDAO.getAll();
         model.addAttribute("statusList", statusList);
 
-        return "status/list";
+        return "status/status_feed";
     }
 }

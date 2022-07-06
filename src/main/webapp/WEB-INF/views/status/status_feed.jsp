@@ -1,5 +1,6 @@
-<section class="news-feed">
-    <div class="card create-post">
+<div class="news-feed">
+
+    <div class="card create-post" id="create_post">
         <div class="profile-photo">
             <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile thumb">
         </div>
@@ -37,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="post-impression">
+            <div class="post-engagement">
                 <div class="likes">
                     <i class="uil uil-heart"></i>
                     <span class="like-count">0</span>
@@ -60,4 +61,4 @@
             </div>
         </div>
     </div>
-</section>
+</div>

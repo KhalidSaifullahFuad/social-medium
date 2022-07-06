@@ -106,13 +106,13 @@ public class UserController extends BaseController{
         return "user/show";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/all")
     public String list(Model model) {
 
         List<User> userList = userDAO.getAll();
         model.addAttribute("userList", userList);
 
-        return "user/list";
+        return "user/peoples";
     }
 }
 

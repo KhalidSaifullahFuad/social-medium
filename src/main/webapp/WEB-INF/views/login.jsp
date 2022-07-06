@@ -1,15 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<title>LogIn</title>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<jsp:include page="includes/css.jsp"/>
+<jsp:include page="includes/js.jsp"/>
 
 <fmt:setBundle basename="messages" />
+<fmt:message key="message.demoUser" var="user" />
 <fmt:message key="message.badCredentials" var="worngUserAndPass" />
 <fmt:message key="message.usernameRequired" var="noUser" />
 <fmt:message key="message.passwordRequired" var="noPass" />
@@ -17,12 +15,17 @@
 <fmt:message key="message.loginError" var="loginErr" />
 <fmt:message key="message.logoutSuccess" var="logoutSucc" />
 
+<title>LogIn</title>
 
 <form class="login-form card" method="post" action="${pageContext.request.contextPath}/login-process">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
     <c:if test="${param.error!=null}">
         <div class="alert alert-danger">${worngUserAndPass}</div>
+    </c:if>
+
+    <c:if test="${demoUser!=null}">
+        <div class="alert alert-primary">${user}</div>
     </c:if>
 
     <c:if test="${param.logout!=null}">
@@ -32,6 +35,7 @@
     <sec:authorize access="isAuthenticated()">
         <div class="alert alert-primary">${loginErr}</div>
     </sec:authorize>
+
 
 
     <label for="username" class="hidden">Username</label>

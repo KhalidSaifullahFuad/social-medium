@@ -1,6 +1,6 @@
 <nav class="nav">
     <section class="logo-section">
-        <a class="logo focus-visible" href="./index.html">
+        <a class="logo focus-visible" href="${pageContext.request.contextPath}/index.html">
             <img src="${pageContext.request.contextPath}/images/socially.svg" alt="">
             <div class="text">Socially</div>
         </a>

@@ -1,0 +1,90 @@
+.user-profile{
+    margin: var(--padding);
+}
+
+.user-profile .user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding-bottom: var(--padding);
+}
+
+.user-profile .user .user-cover-photo{
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.user-profile .user .user-profile-photo{
+    width: 8rem;
+    height: 8rem;
+    border-radius: calc(var(--border-radius) + 0.25rem);
+    border: 0.25rem solid var(--color-background-card);
+    transform: translateY(-50%);
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.user-profile .user .user-name{
+    margin-top: -3rem;
+    font-size: 1.3rem;
+}
+
+.user-profile .user .user-handle{
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-profile .user .headline{
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: center;
+    padding-inline: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.1rem;
+    color: var(--color-text-light);
+}
+
+.user-profile .profile-info{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.user-profile .profile-info > *:not(:last-child)::after{
+    content: '•';
+    color: var(--color-text-dark);
+    margin: 0 0.5rem;
+}
+
+.user-profile .profile-info a{
+    color: var(--color-text-light);
+}
+
+.user-profile .profile-info a:hover{
+    text-decoration: underline;
+}
+
+.user-profile .profile-info .count{
+    color : var(--color-text-dark);
+    font-weight: 600;
+}
+
+.user-profile .user-location{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.user-profile .user-location i{
+    font-size: 1.7rem;
+    color: var(--color-primary);
+}
+
+.user-profile .user-location .location-name{
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    opacity: 0.8;
+}
