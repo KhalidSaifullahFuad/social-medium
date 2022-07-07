@@ -1,21 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fuad
-  Date: 19-Jun-22
-  Time: 09:43 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Logout</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-</head>
-<body>
-<form class="" method="post" action="${pageContext.request.contextPath}/logout">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
 
-    <button class="btn btn-primary" type="submit">Log Out</button>
-</form>
-</body>
-</html>
+<div class="modal-container logout-modal">
+    <div class="modal card">
+        <div class="modal-header">
+            <h3 class="title">Logout</h3>
+            <div class="modal-close"><i class="uil uil-times"></i></div>
+        </div>
+
+        <div class="modal-body">
+            <div>Do you want to Logout?</div>
+
+            <form class="" method="post" action="${pageContext.request.contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="footer">
+                    <button class="btn btn-cancel" type="reset">Cancel</button>
+                    <button class="btn btn-logout" type="submit">Logout</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,11 @@
-<title>Social Medium</title>
-<meta charset="UTF-8"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="includes/taglib.jsp"/>
 <jsp:include page="includes/css.jsp"/>
 <jsp:include page="includes/js.jsp"/>
-<jsp:include page="includes/messages.jsp"/>
+
+<meta charset="UTF-8"/>
+<title>Social Medium</title>
 
 <div class="container">
 
@@ -24,12 +25,30 @@
     </main>
 </div>
 
+
+<jsp:include page="auth/logout.jsp"/>
+
 <script>
     $(document).ready(function () {
-        const loadPage = (url, element) => {
+        const loadPage = (url, element, type = 'component') => {
             $.ajax({
                 url: '${pageContext.request.contextPath}/' + url,
-                success: (response) => element.html(response)
+                success: (response) => {
+                    if (type === 'component') {
+                        $(element).html(response);
+                    } else {
+                        $(element).append(response);
+                    }
+
+                    if (url !== "user/all")
+                        $('#contacts_section').show();
+                    if (url === "feed") {
+                        $.get("home.jsp", function (data) {
+                            console.log(data);
+                            $("#create_post").html(data);
+                        });
+                    }
+                }
             });
         };
 
@@ -38,19 +57,20 @@
 
         if (path.startsWith("/feed")) {
             loadPage('status/all', $('#main_section'));
+
         }
-
-
 
 
         // Sidebar click events
         $(".menu-item").delegate("a", "click", function () {
             if ($(this).parent().hasClass("active")) return;
 
-            $(".menu-item").children().removeClass("active");
-            $(this).parent().addClass("active");
-
             let navId = this.id;
+
+            if(navId !== "logout") {
+                $(".menu-item").children().removeClass("active");
+                $(this).parent().addClass("active");
+            }
             if (navId === 'home') {
                 loadPage('status/all', $('#main_section'));
                 $('#create_post').show();
@@ -60,12 +80,24 @@
             } else if (navId === "location") {
                 loadPage("location/all", $("#main_section"))
             } else if (navId === "profile") {
-                loadPage("profile", $("#main_section"))
+                loadPage("profile", $("#main_section"));
+                loadPage("status/all", $("#main_section"), "append");
+            } else if (navId === "settings") {
+                loadPage("settings", $("#main_section"))
             }
+        });
 
-            if (navId !== "people") {
-                $('#contacts_section').show();
-            }
+        // for modal
+        $(".btn-create").on("click", () => {
+            $(".create-post-modal").addClass("show");
+        });
+
+        $(document).delegate(".modal-close, .btn-cancel", "click", () => {
+            $(".modal-container").removeClass("show");
+        });
+
+        $("#logout").on("click", () => {
+            $(".logout-modal").addClass("show");
         });
     });
 </script>

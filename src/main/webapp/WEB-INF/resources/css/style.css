@@ -121,6 +121,20 @@ input{
     font-weight: 500;
 }
 
+/*input:-webkit-autofill::first-line {*/
+/*    font-family: "Poppins", sans-serif;*/
+/*    font-size: 2rem;*/
+/*    color: var(--color-text-dark);*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*input:-webkit-autofill{*/
+/*    font-family: "Poppins", sans-serif;*/
+/*    font-size: 2rem;*/
+/*    color: var(--color-text-dark);*/
+/*    font-weight: 500;*/
+/*}*/
+
 i{
     color: var(--color-icon);
     font-size: 1.5rem;
@@ -134,7 +148,7 @@ i{
 .card{
     background-color: var(--color-background-card);
     border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow) 0px 4px 10px;
+    box-shadow: var(--box-shadow) 0 4px 10px;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -191,6 +205,27 @@ input[type="file"]{
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all .3s ease;
+}
+
+.btn:hover{
+    filter: saturate(2.2);
+}
+
+.btn-outline{
+    background: transparent;
+    color: var(--color-primary);
+    border: 0.125rem solid var(--color-primary);
+}
+
+.btn-cancel{
+    background: transparent;
+    color: var(--color-text-light);
+    border: 0.125rem solid var(--color-text-light);
+}
+
+.btn-cancel:hover{
+    color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .btn-outline{
