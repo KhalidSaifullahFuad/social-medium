@@ -8,57 +8,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 public class FileUtils {
 
-    public static Attachment saveFile(MultipartFile file, String path) throws IOException {
+    public static Attachment saveFile(MultipartFile file, String folderName) throws IOException {
 
-        if (file.isEmpty()) return null;
+        if (file == null) return null;
 
         String fileName = file.getOriginalFilename();
-        var folder = new File(Properties.WRITE_PATH + path);
+        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String filePath = Paths.get(Properties.WRITE_PATH , folderName , fileName).toString(); // for fixing all the slash direction
+
+        File folder = new File(Properties.WRITE_PATH + folderName);
+        
         if(!folder.exists()){
             folder.mkdirs();
-            Path destinationFile = Paths.get(Properties.WRITE_PATH + path + fileName);
+            Path destinationFile = Paths.get(filePath);
             Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
         }
 
         Attachment attachment = new Attachment();
         attachment.setAttachmentName(fileName);
-        attachment.setAttachmentPath(path + fileName);
-        attachment.setAttachmentType(file.getContentType());
+        attachment.setAttachmentPath(filePath);
+        attachment.setAttachmentType(extension);
 
         return attachment;
     }
-
-    public static byte[] getFile(String path) {
-        Path rootLocation = Paths.get(Properties.READ_PATH + path);
-        try {
-            return Files.readAllBytes(rootLocation);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-
-//    public static Attachment saveFile(MultipartFile file, String path) throws IOException {
-//        Path rootLocation = Paths.get(System.getProperty("user.home") + "/social-community");
-//
-//        byte[] bytes  = file.getBytes();
-//
-//        String filePath = servletContext.getRealPath(path);
-//        File dir = new File(filePath);
-//        File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getName());
-//
-//        //System.out.println("EmployeeService.saveFile()>>>>" + serverFile.getAbsolutePath());
-//
-//        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-//        stream.write(bytes);
-//        stream.close();
-//
-//        return null;
-//    }
 
 }

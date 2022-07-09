@@ -19,4 +19,17 @@ public class RootConfig {
     public AuthSuccessHandler authSuccessHandler() {
         return new AuthSuccessHandler();
     }
+
+    /*
+        * Multipart Filter Config alternative
+
+        @Bean(name = "multipartResolver")
+        public CommonsMultipartResolver multipartResolver() {
+            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+            multipartResolver.setMaxUploadSize(Properties.MAX_UPLOAD_SIZE);
+            return multipartResolver;
+        }
+    */
+
+
 }

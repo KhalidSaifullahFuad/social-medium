@@ -528,8 +528,11 @@ input[type="file"]{
     font-weight: 400;
     color: var(--color-text-dark);
     opacity: .8;
-    margin-bottom: var(--min-padding);
     line-height: 1.6rem;
+}
+
+.post .post-images {
+    margin-top: var(--min-padding);
 }
 
 .post .post-images img{
