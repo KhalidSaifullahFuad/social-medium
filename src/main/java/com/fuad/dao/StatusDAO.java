@@ -16,7 +16,7 @@ public class StatusDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Long insert(Status status) {
+    public Long save(Status status) {
         Long id = -1L;
         Session session = sessionFactory.getCurrentSession();
 
@@ -31,7 +31,7 @@ public class StatusDAO {
         return id;
     }
 
-    public Status getById(Long id) {
+    public Status findById(Long id) {
         return sessionFactory.getCurrentSession().get(Status.class, id);
     }
 
@@ -51,17 +51,7 @@ public class StatusDAO {
         return id;
     }
 
-    public Long delete(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        Status status = session.load(Status.class, id.toString());
-
-        session.delete(status);
-        session.flush();
-
-        return id;
-    }
-
-    public List<Status> getAll(){
+    public List<Status> findAll(){
         Query query = sessionFactory.getCurrentSession().createQuery("FROM Status", Status.class);
         List<Status> statusList = query.list();
 

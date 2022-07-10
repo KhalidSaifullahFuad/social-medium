@@ -14,7 +14,7 @@ public class AuthenticationController extends BaseController {
     @GetMapping("/login")
     public String login(Model model) {
 
-        if(userDAO.getAll().size() == 0){
+        if(userDAO.findAll().size() == 0){
             createDemoUser();
             model.addAttribute("demoUser", "admin");
         }

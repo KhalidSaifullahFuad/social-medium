@@ -23,7 +23,7 @@ public class UserDAO {
     private PasswordEncoder passwordEncoder;
 
 
-    public Long insert(User user) {
+    public Long save(User user) {
         Long id = -1L;
         Session session = sessionFactory.getCurrentSession();
 
@@ -56,12 +56,11 @@ public class UserDAO {
         return id;
     }
 
-    public User getById(Long id) {
-        User user = sessionFactory.getCurrentSession().load(User.class, id);
-        return user;
+    public User findById(Long id) {
+        return sessionFactory.getCurrentSession().load(User.class, id);
     }
 
-    public User getByUsername(String username) {
+    public User findByUsername(String username) {
         List<User> users = sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE name = :username", User.class)
                 .setParameter("username", username)
@@ -69,7 +68,7 @@ public class UserDAO {
         return users.size() > 0 ? users.get(0) : null;
     }
 
-    public User getByEmail(String email) {
+    public User findByEmail(String email) {
         List<User> users = sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE email = :email", User.class)
                 .setParameter("email", email)
@@ -77,13 +76,13 @@ public class UserDAO {
         return users.size() > 0 ? users.get(0) : null;
     }
 
-    public List<User> getAll() {
+    public List<User> findAll() {
         Query<User> query = sessionFactory.getCurrentSession().createQuery("FROM User", User.class);
 
         return query.getResultList();
     }
 
-    public List<User> getAllByLocationId(Long locationId) {
+    public List<User> findAllByLocationId(Long locationId) {
         List<User> userList = sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE locationId = :locationId", User.class)
                 .setParameter("locationId", locationId)

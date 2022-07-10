@@ -31,7 +31,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController extends BaseController{
 
     @Autowired
@@ -40,7 +40,7 @@ public class UserController extends BaseController{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/create")
+    @GetMapping("user/create")
     public String create(Model model) {
 
         model.addAttribute("locationList", getAllLocation());
@@ -49,7 +49,7 @@ public class UserController extends BaseController{
         return "user/create";
     }
 
-    @PostMapping(value = "/store")
+    @PostMapping(value = "user/store")
     @Validated
     public String store(Model model, @Valid @ModelAttribute("userDto") UserDto userDto, BindingResult br, @RequestParam("image") MultipartFile file) throws IOException {
 
@@ -58,7 +58,7 @@ public class UserController extends BaseController{
             return "/user/create";
         }
 
-        Location location = locationDAO.getByName(userDto.getLocation());
+        Location location = locationDAO.findByLocationName(userDto.getLocation());
 
         User user = new User();
         user.setName(userDto.getName());
@@ -68,48 +68,48 @@ public class UserController extends BaseController{
         user.setLocation(location);
 
         if(!file.isEmpty()) {
-            Attachment  attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
+            Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
             user.setAttachment(attachment);
         }
 
-        userDAO.insert(user);
+        userDAO.save(user);
 
         return "redirect:/user/show/" + user.getId();
     }
 
-    @GetMapping(value = "/show/{id}")
-    public String show(Model model, @PathVariable(value = "id") String id) {
+//    @GetMapping(value = "/show/{id}")
+//    public String show(Model model, @PathVariable(value = "id") String id) {
+//
+//        User user = userDAO.getById(Long.parseLong(id));
+//        UserResponseDto userResponseDto = new UserResponseDto();
+//
+//        BeanUtils.copyProperties(user, userResponseDto);
+//
+//        userResponseDto.setLocationName(user.getLocation().getLocationName());
+//
+//        if(user.getAttachment() != null) {
+//            byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
+//            String imgUrl = Base64.getEncoder().encodeToString(bytes);
+//            userResponseDto.setImage(imgUrl);
+//        }
+//        model.addAttribute("user", userResponseDto);
+//
+//        return "user/show";
+//    }
+//
+//    @PostMapping("/update")
+//    public String update(Model model, @ModelAttribute("user") User user) {
+//        model.addAttribute("user", user);
+//
+//        userDAO.update(user);
+//
+//        return "user/show";
+//    }
 
-        User user = userDAO.getById(Long.parseLong(id));
-        UserResponseDto userResponseDto = new UserResponseDto();
+    @GetMapping("user/all")
+    public String all(Model model) {
 
-        BeanUtils.copyProperties(user, userResponseDto);
-
-        userResponseDto.setLocationName(user.getLocation().getLocationName());
-
-        if(user.getAttachment() != null) {
-            byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
-            String imgUrl = Base64.getEncoder().encodeToString(bytes);
-            userResponseDto.setImage(imgUrl);
-        }
-        model.addAttribute("user", userResponseDto);
-
-        return "user/show";
-    }
-
-    @PostMapping("/update")
-    public String update(Model model, @ModelAttribute("user") User user) {
-        model.addAttribute("user", user);
-
-        userDAO.update(user);
-
-        return "user/show";
-    }
-
-    @GetMapping("/all")
-    public String list(Model model) {
-
-        List<User> userList = userDAO.getAll();
+        List<User> userList = userDAO.findAll();
         model.addAttribute("userList", userList);
 
         return "user/peoples";

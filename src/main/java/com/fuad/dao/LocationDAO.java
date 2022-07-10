@@ -16,7 +16,7 @@ public class LocationDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Long insert(Location location) {
+    public Long save(Location location) {
         Long id = -1L;
         Session session = sessionFactory.getCurrentSession();
 
@@ -46,43 +46,22 @@ public class LocationDAO {
 
         return id;
     }
-    public Location getById(Long id) {
-        Location location = null;
-        Session session = sessionFactory.getCurrentSession();
-
-        try {
-            location = session.get(Location.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
-        session.flush();
-
-        return location;
+    public Location findById(Long id) {
+        return sessionFactory.getCurrentSession().get(Location.class, id);
     }
 
-    public Location getByName(String name) {
-        Location location = null;
-        Session session = sessionFactory.getCurrentSession();
+    public Location findByLocationName(String locationName) {
+        List<Location> locationList = sessionFactory.getCurrentSession()
+                .createQuery("FROM Location WHERE locationName = :locationName", Location.class)
+                .setParameter("locationName", locationName)
+                .getResultList();
 
-        try {
-            Query query = session.createQuery("FROM Location WHERE locationName = :name").setParameter("name", name);
-            location = (Location) query.uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
-        session.flush();
-
-        return location;
+        return locationList.size() > 0 ? locationList.get(0) : null;
     }
 
 
-    public List<Location> getAll(){
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Location", Location.class);
-        List<Location> locationList = query.list();
-
-        return locationList;
+    public List<Location> findAll(){
+        return sessionFactory.getCurrentSession().createQuery("FROM Location", Location.class).getResultList();
     }
 
 }

@@ -39,7 +39,7 @@ public class LocationController {
 
         Location location = new Location();
         BeanUtils.copyProperties(locationDto, location);
-        locationDAO.insert(location);
+        locationDAO.save(location);
 
         return "redirect:location/show/" + location.getId();
     }
@@ -47,7 +47,7 @@ public class LocationController {
     @GetMapping(value = "/show/{id}")
     public String show(Model model, @PathVariable(value = "id") String id) {
 
-        Location location = locationDAO.getById(Long.parseLong(id));
+        Location location = locationDAO.findById(Long.parseLong(id));
         model.addAttribute("location", location);
 
         return "location/show";
@@ -56,7 +56,7 @@ public class LocationController {
     @GetMapping("/all")
     public String all(Model model) {
 
-        List<Location> locationList = locationDAO.getAll();
+        List<Location> locationList = locationDAO.findAll();
         model.addAttribute("locationList", locationList);
 
         return "location/locations";

@@ -17,7 +17,7 @@ public class AttachmentDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public Long insert(Attachment attachment) {
+    public Long save(Attachment attachment) {
         Long id = -1L;
         Session session = sessionFactory.getCurrentSession();
 
@@ -32,7 +32,7 @@ public class AttachmentDAO {
         return id;
     }
 
-    public void insertBulk(List<Attachment> attachments) {
+    public void saveBulk(List<Attachment> attachments) {
         Session session = sessionFactory.getCurrentSession();
         try {
             attachments.forEach(session::save);

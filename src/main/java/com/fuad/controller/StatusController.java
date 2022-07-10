@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/status")
 @Validated
-public class StatusController extends BaseController{
+public class StatusController extends BaseController {
 
     @Autowired
     private StatusDAO statusDAO;
@@ -46,7 +46,6 @@ public class StatusController extends BaseController{
         model.addAttribute("privacyList", getAllPrivacy());
         model.addAttribute("status", new StatusDto());
 
-
         return "status/create";
     }
 
@@ -55,7 +54,7 @@ public class StatusController extends BaseController{
         if (result.hasErrors())
             return "status/create";
 
-        Location location = locationDAO.getByName(statusDto.getLocation());
+        Location location = locationDAO.findByLocationName(statusDto.getLocation());
         List<Attachment> attachmentList = new ArrayList<>();
 
         for (MultipartFile file : files) {
@@ -65,14 +64,14 @@ public class StatusController extends BaseController{
             }
         }
 
-        attachmentDAO.insertBulk(attachmentList);
+        attachmentDAO.saveBulk(attachmentList);
 
         Status status = new Status();
         BeanUtils.copyProperties(statusDto, status);
         status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
 
-        statusDAO.insert(status);
+        statusDAO.save(status);
 
         return "redirect:/status/show/" + status.getId();
     }
@@ -80,7 +79,7 @@ public class StatusController extends BaseController{
     @GetMapping(value = "/show/{id}")
     public String show(Model model, @PathVariable(value = "id") String id) {
 
-        Status status = statusDAO.getById(Long.parseLong(id));
+        Status status = statusDAO.findById(Long.parseLong(id));
         model.addAttribute("status", status);
 
         return "status/show";
@@ -89,7 +88,7 @@ public class StatusController extends BaseController{
     @GetMapping("/all")
     public String all(Model model) {
 
-        List<Status> statusList = statusDAO.getAll();
+        List<Status> statusList = statusDAO.findAll();
         model.addAttribute("statusList", statusList);
 
         return "status/status_feed";

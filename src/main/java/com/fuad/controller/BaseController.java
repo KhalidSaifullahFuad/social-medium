@@ -20,7 +20,7 @@ public class BaseController {
     protected UserDAO userDAO;
 
     protected List<String> getAllLocation(){
-        List<Location> locations = locationDAO.getAll();
+        List<Location> locations = locationDAO.findAll();
         List<String> locationList = new ArrayList<>();
 
         for (Location location : locations) {
@@ -48,7 +48,7 @@ public class BaseController {
             location.setLocationName("Dhaka");
             locationDAO.save(location);
         }else{
-            location = locationDAO.getByLocationName(locations.get(0));
+            location = locationDAO.findByLocationName(locations.get(0));
         }
 
         User user = new User();
@@ -58,6 +58,6 @@ public class BaseController {
         user.setRole(Role.ROLE_ADMIN);
         user.setLocation(location);
 
-        userDAO.insert(user);
+        userDAO.save(user);
     }
 }
