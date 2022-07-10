@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/status")
 @Validated
-public class StatusController {
+public class StatusController extends BaseController{
 
     @Autowired
     private StatusDAO statusDAO;
@@ -41,16 +41,11 @@ public class StatusController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<Location> locations = locationDAO.getAll();
-        List<String> locationList = new ArrayList<>();
 
-        for (Location location : locations) {
-            locationList.add(location.getLocationName());
-        }
-
-        model.addAttribute("locationList", locationList);
-        model.addAttribute("privacyList", Arrays.asList("Public", "Private"));
+        model.addAttribute("locationList", getAllLocation());
+        model.addAttribute("privacyList", getAllPrivacy());
         model.addAttribute("status", new StatusDto());
+
 
         return "status/create";
     }
