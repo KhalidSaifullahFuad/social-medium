@@ -3,15 +3,19 @@
 
 <div class="news-feed">
 
-    <div id="create_post"></div>
+    <div class="card create-post" id="create_post">
+        <jsp:include page="../components/profile_photo.jsp"/>
+
+        <input type="text" placeholder="What's new, Fuad?">
+
+        <button class="btn">Post</button>
+    </div>
 
     <div class="posts">
         <c:forEach var="status" items="${statusList}">
             <div class="post card">
                 <div class="post-header">
-                    <div class="profile-photo">
-                        <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-                    </div>
+                    <jsp:include page="../components/profile_photo.jsp"/>
 
                     <div class="user-info">
                         <div class="user-name">Khalid Saifullah Fuad</div>

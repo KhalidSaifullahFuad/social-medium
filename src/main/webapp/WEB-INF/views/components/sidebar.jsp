@@ -1,13 +1,18 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <section class="sidebar">
-    <div class="profile card">
-        <div class="profile-photo">
-            <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
+    <sec:authorize access="isAuthenticated()">
+        <div class="profile card">
+            <jsp:include page="profile_photo.jsp"/>
+
+            <div class="profile-info">
+                <div class="user-name">${user.getUsername()}</div>
+                <div class="user-handle">@${user.getHandle()}</div>
+            </div>
         </div>
-        <div class="profile-info">
-            <div class="user-name">Khalid Saifullah Fuad</div>
-            <div class="user-handle">@khalidsaifullahfuad</div>
-        </div>
-    </div>
+    </sec:authorize>
 
     <ul class="menu-item card">
         <li class="active"><a href="#" id="home"><i class="uil uil-estate"></i><h3>Home</h3></a></li>

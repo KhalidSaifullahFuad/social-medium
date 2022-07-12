@@ -6,9 +6,8 @@
 
     <div class="contact-list card">
         <div class="contact">
-            <div class="profile-photo">
-                <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-            </div>
+            <jsp:include page="../components/profile_photo.jsp"/>
+
             <div class="profile-info">
                 <div class="user-name">Mahedi Hasan</div>
                 <div class="user-handle">@mahedihasan</div>
@@ -20,9 +19,7 @@
         </div>
 
         <div class="contact">
-            <div class="profile-photo">
-                <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-            </div>
+            <jsp:include page="../components/profile_photo.jsp"/>
 
             <div class="profile-info">
                 <div class="user-name">Masud Ahmed</div>
@@ -35,9 +32,7 @@
         </div>
 
         <div class="contact">
-            <div class="profile-photo">
-                <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-            </div>
+            <jsp:include page="../components/profile_photo.jsp"/>
 
             <div class="user-info">
                 <div class="user-name">Yeasir Arafat</div>
@@ -50,9 +45,7 @@
         </div>
 
         <div class="contact">
-            <div class="profile-photo">
-                <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-            </div>
+            <jsp:include page="../components/profile_photo.jsp"/>
 
             <div class="user-info">
                 <div class="user-name">Sibgatullah Labib</div>
@@ -65,9 +58,7 @@
         </div>
 
         <div class="contact">
-            <div class="profile-photo">
-                <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-            </div>
+            <jsp:include page="../components/profile_photo.jsp"/>
 
             <div class="user-info">
                 <div class="user-name">Saadullah Fardin</div>

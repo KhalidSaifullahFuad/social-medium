@@ -1,6 +1,6 @@
 <nav class="nav">
     <section class="logo-section">
-        <a class="logo focus-visible" href="${pageContext.request.contextPath}/index.html">
+        <a class="logo focus-visible" href="${pageContext.request.contextPath}/feed">
             <img src="${pageContext.request.contextPath}/images/socially.svg" alt="">
             <div class="text">Socially</div>
         </a>
@@ -11,9 +11,9 @@
             <i class="uil uil-search"></i>
             <input type="search" name="search" id="search_box" placeholder="Search">
         </div>
+
         <div class="btn btn-create">Create</div>
-        <div class="profile-photo">
-            <img src="${pageContext.request.contextPath}/images/profile.jpg" alt="profile-photo">
-        </div>
+
+        <jsp:include page="profile_photo.jsp"/>
     </section>
 </nav>

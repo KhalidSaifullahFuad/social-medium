@@ -1,32 +1,18 @@
 package com.fuad.controller;
 
-import com.fuad.config.Properties;
-import com.fuad.config.FileUtils;
-import com.fuad.dao.LocationDAO;
-import com.fuad.dao.UserDAO;
-import com.fuad.dto.UserResponseDto;
-import com.fuad.entity.Attachment;
 import com.fuad.dto.UserDto;
-import com.fuad.entity.Location;
 import com.fuad.entity.User;
-
-
-import com.fuad.enums.Role;
-import org.springframework.beans.BeanUtils;
+import com.fuad.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 
@@ -35,10 +21,7 @@ import java.util.List;
 public class UserController extends BaseController{
 
     @Autowired
-    private UserDAO userDAO;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     @GetMapping("user/create")
     public String create(Model model) {
@@ -58,23 +41,9 @@ public class UserController extends BaseController{
             return "/user/create";
         }
 
-        Location location = locationDAO.findByLocationName(userDto.getLocation());
+        Long id = userService.insert(userDto, file);
 
-        User user = new User();
-        user.setName(userDto.getName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setRole(Role.ROLE_USER);
-        user.setLocation(location);
-
-        if(!file.isEmpty()) {
-            Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
-            user.setAttachment(attachment);
-        }
-
-        userDAO.save(user);
-
-        return "redirect:/user/show/" + user.getId();
+        return "redirect:/user/show/" + id;
     }
 
 //    @GetMapping(value = "/show/{id}")
