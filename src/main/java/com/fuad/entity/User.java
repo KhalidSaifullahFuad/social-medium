@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -26,12 +27,14 @@ public class User implements Serializable, UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "handle")
+    private String handle;
 
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -45,8 +48,23 @@ public class User implements Serializable, UserDetails {
     @JoinColumn(name = "attachment_id", referencedColumnName = "id")
     private Attachment attachment;
 
+
     @OneToMany(orphanRemoval = true, mappedBy = "user")
     private List<Status> statusList;
+
+
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinTable(name = "user_followers",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "follower_id", referencedColumnName = "id")})
+    private List<User> followerList;
+
+
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

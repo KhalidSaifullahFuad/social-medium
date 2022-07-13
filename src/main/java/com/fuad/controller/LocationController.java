@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -39,6 +40,8 @@ public class LocationController {
 
         Location location = new Location();
         BeanUtils.copyProperties(locationDto, location);
+        location.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
         locationDAO.save(location);
 
         return "redirect:location/show/" + location.getId();

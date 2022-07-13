@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -21,23 +22,11 @@ public class Status implements Serializable {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
+    private String statusText;
 
     @Column(name = "privacy")
     private String privacy;
-
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
-
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY) //, targetEntity = User.class)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -47,10 +36,18 @@ public class Status implements Serializable {
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinTable(name = "status_attachments",
             joinColumns = {@JoinColumn(name = "status_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "attachment_id", referencedColumnName = "id")})
     private List<Attachment> statusAttachmentList;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 }

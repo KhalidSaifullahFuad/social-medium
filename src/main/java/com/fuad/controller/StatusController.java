@@ -1,7 +1,7 @@
 package com.fuad.controller;
 
 import com.fuad.config.Properties;
-import com.fuad.config.FileUtils;
+import com.fuad.util.FileUtils;
 import com.fuad.dao.AttachmentDAO;
 import com.fuad.dao.LocationDAO;
 import com.fuad.dao.StatusDAO;
@@ -17,12 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -70,6 +69,7 @@ public class StatusController extends BaseController {
         BeanUtils.copyProperties(statusDto, status);
         status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
+        status.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         statusDAO.save(status);
 

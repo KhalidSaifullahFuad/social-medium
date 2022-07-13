@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fuad
-  Date: 19-May-22
-  Time: 08:29 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -21,15 +14,10 @@
 
             <%--@elvariable id="status" type="com.fuad.dto.StatusDto"--%>
             <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <form:input type="text" cssClass="form-control" id="title" placeholder="" path="title"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <form:textarea cssClass="form-control" path="description"/>
-                    <form:errors path="description" cssClass="text-danger"/>
+               <div class="form-group">
+                    <label for="statusText">Status</label>
+                    <form:textarea cssClass="form-control" path="statusText"/>
+                    <form:errors path="statusText" cssClass="text-danger"/>
                 </div>
 
                 <form:select cssClass="dropdown" path="location">

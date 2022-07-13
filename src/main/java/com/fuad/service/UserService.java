@@ -1,6 +1,6 @@
 package com.fuad.service;
 
-import com.fuad.config.FileUtils;
+import com.fuad.util.FileUtils;
 import com.fuad.config.Properties;
 import com.fuad.dao.LocationDAO;
 import com.fuad.dao.UserDAO;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -34,7 +35,7 @@ public class UserService implements UserDetailsService {
         return username.contains("@") ? userDAO.findByEmail(username) : userDAO.findByUsername(username);
     }
 
-    public User getCurrentUsername() {
+    public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (User) authentication.getPrincipal();
     }
@@ -54,6 +55,8 @@ public class UserService implements UserDetailsService {
             Attachment attachment = FileUtils.saveFile(file, Properties.USER_FOLDER);
             user.setAttachment(attachment);
         }
+
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         userDAO.save(user);
 

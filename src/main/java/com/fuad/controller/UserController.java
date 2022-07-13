@@ -46,26 +46,15 @@ public class UserController extends BaseController{
         return "redirect:/user/show/" + id;
     }
 
-//    @GetMapping(value = "/show/{id}")
-//    public String show(Model model, @PathVariable(value = "id") String id) {
-//
-//        User user = userDAO.getById(Long.parseLong(id));
-//        UserResponseDto userResponseDto = new UserResponseDto();
-//
-//        BeanUtils.copyProperties(user, userResponseDto);
-//
-//        userResponseDto.setLocationName(user.getLocation().getLocationName());
-//
-//        if(user.getAttachment() != null) {
-//            byte[] bytes = FileUtils.getFile(user.getAttachment().getAttachmentPath());
-//            String imgUrl = Base64.getEncoder().encodeToString(bytes);
-//            userResponseDto.setImage(imgUrl);
-//        }
-//        model.addAttribute("user", userResponseDto);
-//
-//        return "user/show";
-//    }
-//
+    @GetMapping(value = "user/{id}")
+    public String show(Model model, @PathVariable(value = "id") String id) {
+
+        User user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        return "user/profile";
+    }
+
 //    @PostMapping("/update")
 //    public String update(Model model, @ModelAttribute("user") User user) {
 //        model.addAttribute("user", user);
