@@ -448,6 +448,7 @@ input[type="file"]{
     grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 1rem var(--min-padding);
+    margin-bottom: var(--padding);
 }
 
 .create-post  input{
@@ -467,6 +468,10 @@ input[type="file"]{
 .post{
     padding-top: var(--min-padding);
     margin-top: var(--padding);
+}
+
+.post:first-child{
+    margin-top: 0;
 }
 
 .post .post-header{

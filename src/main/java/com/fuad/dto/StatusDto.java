@@ -9,7 +9,7 @@ public class StatusDto {
     String title;
 
     @NotBlank(message = "Enter your status")
-    String description;
+    String statusText;
 
     @NotBlank(message = "Enter your location")
     String location;

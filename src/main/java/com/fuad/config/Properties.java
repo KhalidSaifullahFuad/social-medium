@@ -1,8 +1,13 @@
 package com.fuad.config;
 
 public class Properties {
-    public static final String WRITE_PATH = "/Documents/docker-data/static_data/social-community/"; //System.getProperty("user.home") + "/social-community/"; // user.home is the path to the user's home directory
-    public static final String READ_PATH = "/Documents/docker-data/static_data/social-community/"; //System.getProperty("user.home") + "/social-community/"; // same as WRITE_PATH but for better reading
+    public static final String WRITE_PATH = System.getProperty("user.home") + "/social-medium/"; // user.home is the path to the user's home directory
+    public static final String READ_PATH = System.getProperty("user.home") + "/social-medium/"; // same as WRITE_PATH but for better reading
+
+
+//     For docker volume
+//    public static final String WRITE_PATH = "/Documents/docker-data/static_data/social-medium/";
+//    public static final String READ_PATH = "/Documents/docker-data/static_data/social-medium/";
 
     public static final String USER_FOLDER = "user/"; // for saving profile photos in different folders
     public static final String STATUS_FOLDER = "status/"; // for saving status files in different folders

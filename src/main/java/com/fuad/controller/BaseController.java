@@ -39,6 +39,16 @@ public class BaseController {
         return privacyList;
     }
 
+    protected List<String> getAllRole(){
+        List<String> roleList = new ArrayList<>();
+
+        for(Role role : Role.values()){
+            roleList.add(role.name());
+        }
+
+        return roleList;
+    }
+
     protected void createDemoUser(){
 
         List<String> locations =  getAllLocation();

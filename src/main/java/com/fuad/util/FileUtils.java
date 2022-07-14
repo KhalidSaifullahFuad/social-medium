@@ -1,5 +1,6 @@
-package com.fuad.config;
+package com.fuad.util;
 
+import com.fuad.config.Properties;
 import com.fuad.entity.Attachment;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,15 +19,14 @@ public class FileUtils {
 
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-        String filePath = Paths.get(Properties.WRITE_PATH , folderName , fileName).toString(); // for fixing all the slash direction
+        String filePath = Paths.get(Properties.WRITE_PATH, folderName, fileName).toString(); // for fixing all the slash direction
 
         File folder = new File(Properties.WRITE_PATH + folderName);
-        
-        if(!folder.exists()){
-            folder.mkdirs();
-            Path destinationFile = Paths.get(filePath);
-            Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
-        }
+
+        if (!folder.exists()) folder.mkdirs();
+
+        Path destinationFile = Paths.get(filePath);
+        Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
 
         Attachment attachment = new Attachment();
         attachment.setAttachmentName(fileName);

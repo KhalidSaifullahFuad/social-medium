@@ -15,9 +15,7 @@
 
         <jsp:include page="components/sidebar.jsp"/>
 
-        <section id="main_section">
-            <%--            <jsp:include page="status/status_feed.jsp"/>--%>
-        </section>
+        <section id="main_section"></section>
 
         <section id="contacts_section">
             <jsp:include page="components/contacts.jsp"/>
@@ -30,25 +28,26 @@
 
 <script>
     $(document).ready(function () {
-        const loadPage = (url, element, type = 'component') => {
-            $.ajax({
-                url: '${pageContext.request.contextPath}/' + url,
-                success: (response) => {
-                    if (type === 'component') {
-                        $(element).html(response);
-                    } else {
-                        $(element).append(response);
-                    }
+        const loadPage = (...urls) => {
+            let element = $('#main_section');
 
-                    if (url !== "user/all")
-                        $('#contacts_section').show();
-                    if (url === "feed") {
-                        $.get("home.jsp", function (data) {
-                            console.log(data);
-                            $("#create_post").html(data);
-                        });
+            $.each(urls, function(i, url){
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/' + url,
+                    success: (response) => {
+                        if (i === 0) {
+                            $(element).html(response);
+                        } else {
+                            $(element).append(response);
+                        }
+
+                        if (url !== "user/all")
+                            $('#contacts_section').show();
+                        if (i > 0 && url === "status/all") {
+                            $("#create_post").hide();
+                        }
                     }
-                }
+                });
             });
         };
 
@@ -56,8 +55,7 @@
 
 
         if (path.startsWith("/feed")) {
-            loadPage('status/all', $('#main_section'));
-
+            loadPage('status/all');
         }
 
 
@@ -71,19 +69,25 @@
                 $(".menu-item").children().removeClass("active");
                 $(this).parent().addClass("active");
             }
+
+            const pages = {
+                "home" : "status/all",
+                "people" : "user/all"
+            }
+            console.log(pages[navId]);
+
             if (navId === 'home') {
-                loadPage('status/all', $('#main_section'));
-                $('#create_post').show();
+                loadPage('status/all');
+                $("#create_post").show();
             } else if (navId === 'people') {
-                loadPage('user/all', $('#main_section'));
-                $('#contacts_section').hide();
+                loadPage('user/all');
+                $("#contacts_section").hide();
             } else if (navId === "location") {
-                loadPage("location/all", $("#main_section"))
+                loadPage("location/all");
             } else if (navId === "profile") {
-                loadPage("profile", $("#main_section"));
-                loadPage("status/all", $("#main_section"), "append");
+                loadPage("user/1", "status/all");
             } else if (navId === "settings") {
-                loadPage("settings", $("#main_section"))
+                loadPage("settings")
             }
         });
 

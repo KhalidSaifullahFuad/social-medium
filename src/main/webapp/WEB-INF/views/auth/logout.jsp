@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
 
@@ -12,13 +14,12 @@
         <div class="modal-body">
             <div>Do you want to Logout?</div>
 
-            <form class="" method="post" action="${pageContext.request.contextPath}/logout">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <form:form class="" method="post" action="${pageContext.request.contextPath}/logout">
                 <div class="footer">
                     <button class="btn btn-cancel" type="reset">Cancel</button>
                     <button class="btn btn-logout" type="submit">Logout</button>
                 </div>
-            </form>
+            </form:form>
         </div>
     </div>
 </div>
