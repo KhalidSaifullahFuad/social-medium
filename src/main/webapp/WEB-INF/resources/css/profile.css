@@ -1,5 +1,6 @@
 .user-profile{
     margin: var(--padding);
+    margin-bottom: 0;
 }
 
 .user-profile .user{

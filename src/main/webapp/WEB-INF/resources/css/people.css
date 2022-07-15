@@ -36,8 +36,9 @@
 .people-list .user .user-profile-photo{
     width: 4.5rem;
     height: 4.5rem;
-    border: 0.2rem solid var(--color-background-card);
-    border-radius: calc(var(--border-radius) + 0.2rem);
+    /*border: 0.2rem solid var(--color-background-card);*/
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0 0.2rem var(--color-background-card);
     object-fit: cover;
     transform: translateY(-50%);
 }

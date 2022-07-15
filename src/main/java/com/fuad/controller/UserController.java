@@ -46,10 +46,13 @@ public class UserController extends BaseController{
         return "redirect:/user/show/" + id;
     }
 
-    @GetMapping(value = "user/{id}")
-    public String show(Model model, @PathVariable(value = "id") String id) {
+    @GetMapping(value = "user/{handle}")
+    public String show(Model model, @PathVariable(value = "handle") String handle) {
 
-        User user = userService.getCurrentUser();
+        User currentUser = userService.getCurrentUser();
+        User user = userService.getUserByHandle(handle);
+
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", user);
 
         return "user/profile";
@@ -66,8 +69,12 @@ public class UserController extends BaseController{
 
     @GetMapping("user/all")
     public String all(Model model) {
-
+        User currentUser = userService.getCurrentUser();
         List<User> userList = userDAO.findAll();
+
+        userList.stream().filter(user -> user.getId() != currentUser.getId());
+
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("userList", userList);
 
         return "user/peoples";

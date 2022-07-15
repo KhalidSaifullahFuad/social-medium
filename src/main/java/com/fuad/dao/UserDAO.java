@@ -60,10 +60,10 @@ public class UserDAO {
         return sessionFactory.getCurrentSession().load(User.class, id);
     }
 
-    public User findByUsername(String username) {
+    public User findByHand(String handle) {
         List<User> users = sessionFactory.getCurrentSession()
-                .createQuery("FROM User WHERE name = :username", User.class)
-                .setParameter("username", username)
+                .createQuery("FROM User WHERE handle = :handle", User.class)
+                .setParameter("handle", handle.toLowerCase())
                 .getResultList();
         return users.size() > 0 ? users.get(0) : null;
     }
@@ -76,6 +76,12 @@ public class UserDAO {
         return users.size() > 0 ? users.get(0) : null;
     }
 
+    public List<User> findByHandleLike(String handle) {
+        return sessionFactory.getCurrentSession().createQuery("FROM User u WHERE u.handle LIKE :handle ORDER BY u.id DESC", User.class)
+                .setParameter("handle", handle + "%")
+                .getResultList();
+    }
+
     public List<User> findAll() {
         Query<User> query = sessionFactory.getCurrentSession().createQuery("FROM User", User.class);
 
@@ -83,11 +89,10 @@ public class UserDAO {
     }
 
     public List<User> findAllByLocationId(Long locationId) {
-        List<User> userList = sessionFactory.getCurrentSession()
+        return sessionFactory.getCurrentSession()
                 .createQuery("FROM User WHERE locationId = :locationId", User.class)
                 .setParameter("locationId", locationId)
                 .getResultList();
-        return userList;
     }
 
 }

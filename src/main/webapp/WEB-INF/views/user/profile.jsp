@@ -1,10 +1,16 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="attachmentId" value="${user.getAttachment().getId()}"/>
+<c:set var="userProfilePhoto" value="${empty attachmentId ? '/images/' : '/attachment/' }${empty attachmentId ? 'user.png' : attachmentId}"/>
+
 <section class="user-profile">
     <div class="user card">
-        <img class="user-cover-photo" src="./assets/images/banner.png" alt="">
-        <img class="user-profile-photo" src="./assets/images/profile.jpg" alt="profile">
-        <h3 class="user-name">Khalid Saifullah Fuad</h3>
-        <div class="user-handle">@khalidsaifullahfuad</div>
-        <div class="headline">Student at Southeast University</div>
+        <img class="user-cover-photo" src="${pageContext.request.contextPath}/images/banner.png" alt="cover photo">
+        <img class="user-profile-photo" src="${userProfilePhoto}" alt="profile photo">
+        <h3 class="user-name">${user.getUsername()}</h3>
+        <div class="user-handle">@${user.getHandle()}</div>
+        <div class="headline"></div>
 
         <div class="profile-info">
             <div class="follower-count">
@@ -20,7 +26,7 @@
 
         <div class="user-location">
             <i class="uil uil-map-marker"></i>
-            <div class="location-name">Dhaka, Bangladesh</div>
+            <div class="location-name">${user.getLocation().getLocationName()}</div>
         </div>
         <!-- <button class="btn">Follow</button> -->
     </div>

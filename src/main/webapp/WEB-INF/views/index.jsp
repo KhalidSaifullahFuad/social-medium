@@ -85,7 +85,7 @@
             } else if (navId === "location") {
                 loadPage("location/all");
             } else if (navId === "profile") {
-                loadPage("user/1", "status/all");
+                loadPage("user/${user.getHandle()}", "status/all");
             } else if (navId === "settings") {
                 loadPage("settings")
             }
