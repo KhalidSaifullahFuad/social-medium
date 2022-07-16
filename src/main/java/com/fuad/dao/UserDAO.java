@@ -95,4 +95,10 @@ public class UserDAO {
                 .getResultList();
     }
 
+    public int count() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT COUNT(*) FROM User", Long.class)
+                .getSingleResult().intValue();
+    }
+
 }

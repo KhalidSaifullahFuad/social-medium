@@ -21,7 +21,7 @@ public class HomeController {
     @GetMapping("/feed")
     public String feed(Model model) {
 
-        model.addAttribute("user", userService.getCurrentUsername());
+        model.addAttribute("user", userService.getCurrentUser());
 
         return "index";
     }

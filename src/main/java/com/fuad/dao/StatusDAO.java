@@ -42,7 +42,7 @@ public class StatusDAO {
         try {
             session.saveOrUpdate(status);
             id = status.getId();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         }
@@ -51,11 +51,18 @@ public class StatusDAO {
         return id;
     }
 
-    public List<Status> findAll(){
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Status", Status.class);
-        List<Status> statusList = query.list();
+    public List<Status> findAll() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Status", Status.class)
+                .getResultList();
 
-        return statusList;
+    }
+
+    public List<Status> findAllByUserId(Long userId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Status s WHERE s.user.id = :userId", Status.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
 //    public List<Status> getAllByLocationId(Long locationId) {

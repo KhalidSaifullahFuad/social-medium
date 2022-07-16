@@ -30,6 +30,7 @@
     $(document).ready(function () {
         const loadPage = (...urls) => {
             let element = $('#main_section');
+            urls = urls.flat(1);
 
             $.each(urls, function(i, url){
                 $.ajax({
@@ -68,27 +69,20 @@
             if(navId !== "logout") {
                 $(".menu-item").children().removeClass("active");
                 $(this).parent().addClass("active");
+            }if (navId === 'people') {
+                $("#contacts_section").hide();
             }
 
             const pages = {
                 "home" : "status/all",
-                "people" : "user/all"
-            }
-            console.log(pages[navId]);
+                "people" : "user/all",
+                "photos" : "attachment/all",
+                "location" : "location/all",
+                "profile" : ["user/${user.getHandle()}", "status/all"]
 
-            if (navId === 'home') {
-                loadPage('status/all');
-                $("#create_post").show();
-            } else if (navId === 'people') {
-                loadPage('user/all');
-                $("#contacts_section").hide();
-            } else if (navId === "location") {
-                loadPage("location/all");
-            } else if (navId === "profile") {
-                loadPage("user/${user.getHandle()}", "status/all");
-            } else if (navId === "settings") {
-                loadPage("settings")
             }
+
+            loadPage(pages[navId]);
         });
 
         // for modal

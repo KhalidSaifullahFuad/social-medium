@@ -1,6 +1,7 @@
 package com.fuad.controller;
 
 import com.fuad.dao.LocationDAO;
+import com.fuad.dao.StatusDAO;
 import com.fuad.dao.UserDAO;
 import com.fuad.entity.Location;
 import com.fuad.entity.User;
@@ -18,6 +19,9 @@ public class BaseController {
 
     @Autowired
     protected UserDAO userDAO;
+
+    @Autowired
+    protected StatusDAO statusDAO;
 
     protected List<String> getAllLocation(){
         List<Location> locations = locationDAO.findAll();

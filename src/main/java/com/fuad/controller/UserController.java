@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -72,7 +73,9 @@ public class UserController extends BaseController{
         User currentUser = userService.getCurrentUser();
         List<User> userList = userDAO.findAll();
 
-        userList.stream().filter(user -> user.getId() != currentUser.getId());
+        userList = userList.stream()
+                .filter(user -> !user.getId().equals(currentUser.getId()))
+                .collect(Collectors.toList());
 
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("userList", userList);
