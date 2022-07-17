@@ -1,6 +1,7 @@
 package com.fuad.controller;
 
 import com.fuad.config.Properties;
+import com.fuad.service.UserService;
 import com.fuad.util.FileUtils;
 import com.fuad.dao.AttachmentDAO;
 import com.fuad.dao.LocationDAO;
@@ -33,10 +34,10 @@ public class StatusController extends BaseController {
     private StatusDAO statusDAO;
 
     @Autowired
-    private LocationDAO locationDAO;
+    private AttachmentDAO attachmentDAO;
 
     @Autowired
-    private AttachmentDAO attachmentDAO;
+    private UserService userService;
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -54,21 +55,15 @@ public class StatusController extends BaseController {
             return "status/create";
 
         Location location = locationDAO.findByLocationName(statusDto.getLocation());
-        List<Attachment> attachmentList = new ArrayList<>();
 
-        for (MultipartFile file : files) {
-            Attachment attachment = FileUtils.saveFile(file, Properties.STATUS_FOLDER);
-            if (attachment != null) {
-                attachmentList.add(attachment);
-            }
-        }
-
+        List<Attachment> attachmentList = FileUtils.saveFiles(files, Properties.STATUS_FOLDER);
         attachmentDAO.saveBulk(attachmentList);
 
         Status status = new Status();
         BeanUtils.copyProperties(statusDto, status);
         status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
+        status.setUser(userService.getCurrentUser());
         status.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         statusDAO.save(status);

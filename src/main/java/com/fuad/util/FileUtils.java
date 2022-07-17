@@ -9,17 +9,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class FileUtils {
 
     public static Attachment saveFile(MultipartFile file, String folderName) throws IOException {
 
-        if (file == null) return null;
+        if (file.isEmpty()) return null;
 
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
         String filePath = Paths.get(Properties.WRITE_PATH, folderName, fileName).toString(); // for fixing all the slash direction
+
+        System.out.println("File path: '" + filePath + "'");
 
         File folder = new File(Properties.WRITE_PATH + folderName);
 
@@ -34,6 +38,19 @@ public class FileUtils {
         attachment.setAttachmentType(extension);
 
         return attachment;
+    }
+
+    public static List<Attachment> saveFiles(MultipartFile[] files, String folderName) throws IOException {
+        List<Attachment> attachmentList = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+            Attachment attachment = saveFile(file, folderName);
+            if (attachment != null) {
+                attachmentList.add(attachment);
+            }
+        }
+
+        return attachmentList;
     }
 
 }
