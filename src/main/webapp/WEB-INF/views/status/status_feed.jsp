@@ -13,12 +13,18 @@
 
     <div class="posts">
         <c:forEach var="status" items="${statusList}">
+            <c:set var="user" value="${status.getUser()}"/>
+            <c:set var="attachmentId" value="${user.getAttachment().getId()}"/>
+            <c:set var="userProfilePhoto" value="${empty attachmentId ? '/images/' : '/attachment/' }${empty attachmentId ? 'user.png' : attachmentId}"/>
+
             <div class="post card">
                 <div class="post-header">
-                    <jsp:include page="../components/profile_photo.jsp"/>
+                    <div class="profile-photo">
+                        <img src="${userProfilePhoto}" alt="${user.getName()}">
+                    </div>
 
                     <div class="user-info">
-                        <div class="user-name">Khalid Saifullah Fuad</div>
+                        <div class="user-name">${user.getName()}</div>
 
                         <div class="post-info">
                             <span class="time" title="Sunday, 16 April 2022 at 12:40 PM">16 April</span>
@@ -31,7 +37,7 @@
                 </div>
 
                 <div class="post-body">
-                    <div class="post-text">Want to perfect as the Perfect Number &#x1F601.</div>
+                    <div class="post-text">${status.getStatusText()}</div>
                     <c:if test="${status.getStatusAttachmentList().size() != 0}">
                         <div class="post-images">
                             <c:forEach var="attachment" items="${status.getStatusAttachmentList()}">

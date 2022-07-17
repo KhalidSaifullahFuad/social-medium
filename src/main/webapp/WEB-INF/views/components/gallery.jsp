@@ -4,7 +4,7 @@
 <div class="photo-gallery">
     <div class="gallery-grid card">
         <c:forEach var="status" items="${statusList}">
-            <c:forEach var="photo" items="${status.statusAttachmentList()}">
+            <c:forEach var="photo" items="${status.getStatusAttachmentList()}">
                 <a href="">
                     <img src="/attachment/${photo.getId()}" class="gallery-image" alt="${photo.getAttachmentName()}">
                 </a>

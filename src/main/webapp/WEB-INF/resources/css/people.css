@@ -1,7 +1,7 @@
 
-.main-content{
-    grid-template-columns: var(--nav-width) auto !important;
-}
+/*.people-section {*/
+/*    grid-template-columns: var(--nav-width) auto !important;*/
+/*}*/
 
 .people-list{
     margin: var(--padding);

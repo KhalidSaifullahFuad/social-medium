@@ -22,7 +22,7 @@ public class Status implements Serializable {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "status_text", columnDefinition = "TEXT")
     private String statusText;
 
     @Column(name = "privacy")

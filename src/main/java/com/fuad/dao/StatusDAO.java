@@ -1,6 +1,9 @@
 package com.fuad.dao;
 
 import com.fuad.entity.Status;
+import com.fuad.entity.User;
+import com.fuad.enums.Privacy;
+import com.fuad.service.UserService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -15,6 +18,9 @@ import java.util.List;
 public class StatusDAO {
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    private UserService userService;
 
     public Long save(Status status) {
         Long id = -1L;
@@ -53,15 +59,20 @@ public class StatusDAO {
 
     public List<Status> findAll() {
         return sessionFactory.getCurrentSession()
-                .createQuery("FROM Status", Status.class)
+                .createQuery("FROM Status s WHERE s.privacy = :privacy ORDER BY s.createdAt DESC", Status.class)
+                .setParameter("privacy", Privacy.PUBLIC.label)
                 .getResultList();
 
     }
 
     public List<Status> findAllByUserId(Long userId) {
+        User currentUser = userService.getCurrentUser();
+        String privacyHQL = (currentUser.getId().equals(userId)) ? "" : " AND s.privacy = "+Privacy.PUBLIC.label;
+
         return sessionFactory.getCurrentSession()
-                .createQuery("FROM Status s WHERE s.user.id = :userId", Status.class)
+                .createQuery("FROM Status s WHERE s.user.id = :userId "+ privacyHQL + " ORDER BY s.createdAt DESC", Status.class)
                 .setParameter("userId", userId)
+//                .setParameter("privacy", new String[]{Privacy.PUBLIC.label, Privacy.FRIENDS.label, Privacy.PRIVATE.label})
                 .getResultList();
     }
 

@@ -30,6 +30,7 @@
     $(document).ready(function () {
         const loadPage = (...urls) => {
             let element = $('#main_section');
+            element.html('');
             urls = urls.flat(1);
 
             $.each(urls, function(i, url){
@@ -69,9 +70,14 @@
             if(navId !== "logout") {
                 $(".menu-item").children().removeClass("active");
                 $(this).parent().addClass("active");
-            }if (navId === 'people') {
-                $("#contacts_section").hide();
             }
+
+            // if (navId === 'people') {
+            //     $("#contacts_section").hide();
+            //     $('.main-content').addClass('people-section');
+            // }else{
+            //     $('.main-content').removeClass('people-section');
+            // }
 
             const pages = {
                 "home" : "status/all",
@@ -81,8 +87,10 @@
                 "profile" : ["user/${user.getHandle()}", "status/all"]
 
             }
-
-            loadPage(pages[navId]);
+            if(pages[navId] !== undefined) {
+                loadPage(pages[navId]);
+            }
+            console.log(pages[navId]);
         });
 
         // for modal
