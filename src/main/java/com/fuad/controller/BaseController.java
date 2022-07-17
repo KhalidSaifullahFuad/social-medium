@@ -37,7 +37,7 @@ public class BaseController {
         List<String> privacyList = new ArrayList<>();
 
         for(Privacy privacy : Privacy.values()){
-            privacyList.add(privacy.name());
+            privacyList.add(privacy.label);
         }
 
         return privacyList;
