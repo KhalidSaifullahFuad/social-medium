@@ -23,7 +23,7 @@
     </main>
 </div>
 
-
+<jsp:include page="modals/create_post.jsp"/>
 <jsp:include page="auth/logout.jsp"/>
 
 <script>

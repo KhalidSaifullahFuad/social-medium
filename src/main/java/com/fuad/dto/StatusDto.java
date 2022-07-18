@@ -11,10 +11,10 @@ public class StatusDto {
     @NotBlank(message = "Enter your status")
     String statusText;
 
-    @NotBlank(message = "Enter your location")
+//    @NotBlank(message = "Enter your location")
     String location;
 
-    @NotBlank(message = "Select privacy")
+//    @NotBlank(message = "Select privacy")
     String privacy;
 
     String attachmentPath;

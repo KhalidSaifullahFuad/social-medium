@@ -54,15 +54,19 @@ public class StatusController extends BaseController {
         if (result.hasErrors())
             return "status/create";
 
-        Location location = locationDAO.findByLocationName(statusDto.getLocation());
 
         List<Attachment> attachmentList = FileUtils.saveFiles(files, Properties.STATUS_FOLDER);
         attachmentDAO.saveBulk(attachmentList);
 
         Status status = new Status();
         BeanUtils.copyProperties(statusDto, status);
-        status.setLocation(location);
         status.setStatusAttachmentList(attachmentList);
+
+        if(statusDto.getLocation() != null) {
+            Location location = locationDAO.findByLocationName(statusDto.getLocation());
+            status.setLocation(location);
+        }
+
         status.setUser(userService.getCurrentUser());
         status.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
