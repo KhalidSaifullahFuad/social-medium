@@ -1,44 +1,47 @@
 <br>
 
-<p align="center">
-  <a href="" rel="noopener">
-  <img src="https://user-images.githubusercontent.com/64584169/177189408-d92cb113-108e-4429-bc07-d2fd44e4173d.svg" height="100" alt="Socially logo"></a>
-</p>
-
-<h1 align="center">SOCIALLY</h3>
-
-<br>
-
 <div align="center">
+ 
+<img src="https://user-images.githubusercontent.com/64584169/177189408-d92cb113-108e-4429-bc07-d2fd44e4173d.svg" height="100" alt="Socially logo"/>
+
+# SOCIALLY
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![GitHub Issues](https://img.shields.io/github/issues/khalidsaifullahfuad/social-medium.svg)](https://github.com/khalidsaifullahfuad/social-medium/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/khalidsaifullahfuad/social-medium.svg)](https://github.com/khalidsaifullahfuad/social-medium/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
+
+Socailly is a **social media application**, inspired by `Facebook`, `Twitter` and `LinkedIn`.
+
+<br />
+
+[About](#about) •
+[Demo / Working](#demo) •
+[Built Using](#built_using) •
+[Authors](#authors) •
+[Acknowledgments](#acknowledgement)
+
 </div>
 
----
-
-<div align="center"> 
-
-
-
-</div>
-
+<!--
 ## 📝 Table of Contents
-
+  
 - [About](#about)
 - [Demo / Working](#demo)
-- [Features](#features)
 - [Getting Started](#getting_started)
 - [Built Using](#built_using)
 - [TODO](/TODO.md)
 - [Contributing](/CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
+-->
+<br>
 
-## 🧐 About <a name = "about"></a>
+
+<h1 align="center">
+About <a name = "about"></a>
+</h1>  
 
 Socially is a social media application like facebook,twitter etc it helps users to connect with each other and share their thoughts and ideas.
 
@@ -47,8 +50,6 @@ Socially is a social media application like facebook,twitter etc it helps users 
 ![screely-1656951438956](https://user-images.githubusercontent.com/64584169/177191274-c6e7a90c-e423-4ab6-b8eb-3181d02ecf2a.png)
 
 ![screely-1656951640449](https://user-images.githubusercontent.com/64584169/177191645-37bf4dec-9d68-4151-a72e-15dfb3955619.png)
-
-## ✨ Features <a name = "features"></a>
 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
@@ -63,7 +64,7 @@ Socially is a social media application like facebook,twitter etc it helps users 
 - [CSS3](https://www.w3.org/Style/) - Design & Animation
 - [JQuery](https://www.jquery.com/) - Functionality & Rendering
 
-## ✍️ Authors <a name = "authors"></a>
+## ✍️ Authors & Contributors <a name = "authors"></a>
 
 - [@khalidsaifullahfuad](https://github.com/khalidsaifullahfuad) - Coder, designer, and maintainer
 - [@mainul35](https://github.com/mainul35) - Mentor
