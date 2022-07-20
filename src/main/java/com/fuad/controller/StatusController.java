@@ -62,8 +62,8 @@ public class StatusController extends BaseController {
         BeanUtils.copyProperties(statusDto, status);
         status.setStatusAttachmentList(attachmentList);
 
-        if(statusDto.getLocation() != null) {
-            Location location = locationDAO.findByLocationName(statusDto.getLocation());
+        if(statusDto.getLocationId() != null) {
+            Location location = locationDAO.findById(statusDto.getLocationId());
             status.setLocation(location);
         }
 

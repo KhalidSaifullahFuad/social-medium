@@ -12,7 +12,7 @@ public class StatusDto {
     String statusText;
 
 //    @NotBlank(message = "Enter your location")
-    String location;
+    Long locationId;
 
 //    @NotBlank(message = "Select privacy")
     String privacy;

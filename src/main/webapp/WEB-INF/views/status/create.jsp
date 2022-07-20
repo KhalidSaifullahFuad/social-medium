@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -20,11 +21,13 @@
                     <form:errors path="statusText" cssClass="text-danger"/>
                 </div>
 
-                <form:select cssClass="dropdown" path="location">
+                <form:select cssClass="dropdown" path="locationId">
                     <form:option selected="true" value="Select Location" disabled="true"/>
-                    <form:options items="${locationList}"/>
+                    <c:forEach var="location" items="${locationList}">
+                        <form:option value="${location.getId()}">${location.getLocationName()}</form:option>
+                    </c:forEach>
                 </form:select>
-                <form:errors path="location" cssClass="text-danger"/>
+                <form:errors path="locationId" cssClass="text-danger"/>
                 <br>
 
                 <form:select cssClass="dropdown" path="privacy">

@@ -23,14 +23,8 @@ public class BaseController {
     @Autowired
     protected StatusDAO statusDAO;
 
-    protected List<String> getAllLocation(){
-        List<Location> locations = locationDAO.findAll();
-        List<String> locationList = new ArrayList<>();
-
-        for (Location location : locations) {
-            locationList.add(location.getLocationName());
-        }
-        return locationList;
+    protected List<Location> getAllLocation(){
+       return locationDAO.findAll();
     }
 
     protected List<String> getAllPrivacy(){
@@ -55,14 +49,14 @@ public class BaseController {
 
     protected void createDemoUser(){
 
-        List<String> locations =  getAllLocation();
+        List<Location> locations =  locationDAO.findAll();
         Location location;
         if(locations.size() == 0){
             location = new Location();
             location.setLocationName("Dhaka");
             locationDAO.save(location);
         }else{
-            location = locationDAO.findByLocationName(locations.get(0));
+            location = locations.get(0);
         }
 
         User user = new User();
