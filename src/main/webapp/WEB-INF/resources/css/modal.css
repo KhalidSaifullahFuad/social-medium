@@ -6,7 +6,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0 0 0 / 0.7);
+    background: rgba(0 0 0 / .7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,8 +22,7 @@
 }
 
 .modal{
-    width: 38rem;
-    height: fit-content;
+    width: 33rem;
     max-width: 100%;
     max-height: 90vh;
     overflow: auto;
@@ -67,22 +66,25 @@
 }
 
 .modal .modal-body #post-text{
-    height: 7rem;
+    width: 100%;
+    height: auto;
+    min-height: 7rem;
     background: var(--color-background-card);
     color: var(--color-text-dark);
     font-family: "Poppins", sans-serif;
     font-size: 1.3rem;
     font-weight: 500;
+    margin-block: 0.8rem;
     resize: none;
 }
 
 .modal .modal-body #post-text.compact{
     font-size: 1rem;
-    height: 3rem;
+    height: fit-content;
 }
 
 .modal .modal-body .btn-post{
-    width: fit-content;
+    width: 100%;
 }
 
 .modal .footer{
@@ -102,6 +104,8 @@
 
 }
 
+
+
 .post-photos{
     width: 100%;
     height: 100%;
@@ -114,11 +118,14 @@
     margin-bottom: 1rem;
     border-radius: var(--border-radius);
     border: 2px solid var(--color-border);
-    visibility: hidden;
+}
+
+.post-photos:empty{
+    display: none;
 }
 .post-photos img{
     width: 100%;
-    height: fit-content;
+    height: 100%;
     border-radius: var(--border-radius);
     overflow: hidden;
     object-fit: contain;
@@ -130,14 +137,13 @@
 
 .post-photos .photo-preview i{
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
     font-size: 1.2rem;
     width: 1.5rem;
     height: 1.5rem;
     line-height: 1.65rem;
+    padding: 0.2rem;
     text-align: center;
-    background: var(--color-background-card);
+    background: var(--color-background);
     border-radius: var(--border-radius);
 }
 
@@ -154,11 +160,17 @@
 }
 
 .logout-modal .modal-body{
-    height: fit-content;
+    font-size: 1.2rem;
 }
 
 .logout-modal .footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: calc(var(--min-padding) * 2.5);
+    margin-top: calc(var(--min-padding) * 2);
+}
+
+select {
+    background: var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 0.1rem 0.2rem;
 }

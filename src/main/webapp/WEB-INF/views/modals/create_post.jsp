@@ -14,6 +14,24 @@
         <div class="modal-body">
             <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data">
 
+                <div class="post-header">
+                    <div class="profile-photo">
+                        <img src="assets/images/profile.jpg" alt="profile thumb">
+                    </div>
+
+                    <div class="post-info">
+                        <div class="user-name">Khalid Saifullah Fuad</div>
+
+                        <div class="user-info">
+                            <select name="privacy" id="">
+                                <option value="public">Public</option>
+                                <option value="connections">Connections</option>
+                                <option value="only-me">Only Me</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <form:textarea id="post-text" placeholder="What's happening?" path="statusText"></form:textarea>
 
                 <div class="post-photos"></div>
