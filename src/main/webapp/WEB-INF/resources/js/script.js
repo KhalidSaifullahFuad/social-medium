@@ -1,12 +1,16 @@
 $(document).ready(function () {
+
+    const getContextPath = () => window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+
     const loadPage = (...urls) => {
         let element = $('#main_section');
         element.html('');
         urls = urls.flat(1);
+        const ctx = getContextPath();
 
         $.each(urls, function(i, url){
             $.ajax({
-                url: '${pageContext.request.contextPath}/' + url,
+                url: ctx + url,
                 success: (response) => {
                     if (i === 0) {
                         $(element).html(response);
@@ -41,13 +45,6 @@ $(document).ready(function () {
             $(this).parent().addClass("active");
         }
 
-        // if (navId === 'people') {
-        //     $("#contacts_section").hide();
-        //     $('.main-content').addClass('people-section');
-        // }else{
-        //     $('.main-content').removeClass('people-section');
-        // }
-
         const pages = {
             "home" : "status/all",
             "people" : "user/all",
@@ -59,7 +56,6 @@ $(document).ready(function () {
         if(pages[navId] !== undefined) {
             loadPage(pages[navId]);
         }
-        console.log(pages[navId]);
     });
 
 
@@ -77,29 +73,15 @@ $(document).ready(function () {
             }
             reader.readAsDataURL(file);
         }
-
-        $(".attachment-label").text(getAddPhotosMsg());
     });
 
-    const getAddPhotosMsg = () => {
-        const photoCount = $(".photo-preview").length + 1;
-
-        if(photoCount == 1){
-            return "Added 1 photo";
-        }else if(photoCount > 1){
-            return `Added ${photoCount} photos`;
-        }
-
-        return "Add to your post";
-    }
 
     $(".post-photos").delegate(".remove-photo", "click", function () {
         $(this).closest(".photo-preview").remove();
-        if($(".photo-preview").length == 0){
+        if($(".photo-preview").length === 0){
             $("#post-text").removeClass("compact");
             $(".post-photos").hide();
         }
-        $(".attachment-label").text(getAddPhotosMsg());
     });
 
 

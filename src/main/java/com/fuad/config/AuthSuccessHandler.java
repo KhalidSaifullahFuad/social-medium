@@ -34,7 +34,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 //        }
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
-        response.sendRedirect(savedRequest == null?  "/feed" : savedRequest.getRedirectUrl());
+        response.sendRedirect(savedRequest == null?  "/feed" : savedRequest.getRedirectUrl().contains("?") ? savedRequest.getRedirectUrl().substring(0, savedRequest.getRedirectUrl().indexOf("?")) : savedRequest.getRedirectUrl());
 
     }
 }
