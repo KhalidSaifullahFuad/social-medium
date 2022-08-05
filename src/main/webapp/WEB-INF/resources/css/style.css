@@ -107,19 +107,6 @@ body{
     /* overflow-y: hidden; */
 }
 
-.container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-input{
-    background: transparent;
-    font-family: "Poppins", sans-serif;
-    font-size: 1rem;
-    color: var(--color-text-dark);
-    font-weight: 500;
-}
 
 /*input:-webkit-autofill::first-line {*/
 /*    font-family: "Poppins", sans-serif;*/
@@ -141,6 +128,12 @@ i{
     cursor: pointer;
 }
 
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .hidden{
     display: none;
 }
@@ -149,6 +142,14 @@ i{
     background-color: var(--color-background-card);
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow) 0 4px 10px;
+}
+
+input{
+    background: transparent;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    font-weight: 500;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -160,8 +161,26 @@ input[type="file"]{
 }
 
 
+/* ---------------------  Form Input --------------------- */
+form input{
+    background: var(--color-background-search);
+    padding: .7rem 1rem;
+    border-radius: var(--border-radius);
+    outline: 0.1rem solid rgba(0, 0, 0, 0.125);
+    transition: outline .2s;
+}
+
+form input:focus{
+    outline: 0.125rem solid var(--color-primary);
+}
+
+form input,
+form .btn{
+    margin-bottom: calc(var(--padding) - 1%);
+}
 
 
+/* ---------------------  Logo Section --------------------- */
 .logo {
     display: flex;
     justify-content: center;
@@ -232,6 +251,15 @@ input[type="file"]{
     background: transparent;
     color: var(--color-primary);
     border: 0.125rem solid var(--color-primary);
+}
+
+.btn-link{
+    background: transparent;
+    color: var(--color-primary);
+    font-weight: 500;
+    font-size: .9rem;
+    padding: 0 !important;
+    margin: 0;
 }
 
 .profile-photo{

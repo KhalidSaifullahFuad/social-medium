@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:include page="includes/css.jsp"/>
-<jsp:include page="includes/js.jsp"/>
+<jsp:include page="../includes/css.jsp"/>
+<jsp:include page="../includes/js.jsp"/>
 
 <fmt:setBundle basename="messages" />
 <fmt:message key="message.demoUser" var="user" />
@@ -17,8 +18,7 @@
 
 <title>LogIn</title>
 
-<form class="login-form card" method="post" action="${pageContext.request.contextPath}/login-process">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<form:form cssClass="login-form card" method="post" action="${pageContext.request.contextPath}/auth/login-process">
 
     <c:if test="${param.error!=null}">
         <div class="alert alert-danger">${worngUserAndPass}</div>
@@ -37,20 +37,21 @@
     </sec:authorize>
 
 
-
     <label for="username" class="hidden">Username</label>
-    <input type="text" id="username" name="username" placeholder="Username or Email" required="">
+    <input type="text" id="username" name="username" placeholder="Username or Email">
 
     <label for="password" class="hidden">Password</label>
-    <input type="password" id="password" name="password" placeholder="Password" required="">
+    <input type="password" id="password" name="password" placeholder="Password">
 
-    <button class="btn btn-primary btn-sign-in" type="button">Sign in</button>
+    <button type="button" class="btn btn-primary btn-sign-in">Sign in</button>
 
     <div class="goto-signup">
         <div>Not registered?</div>
-        <a href="${pageContext.request.contextPath}/user/create">Create User</a></div>
+        <button type="button" class="btn btn-link link-sign-up">Sign Up</button>
     </div>
-</form>
+</form:form>
+
+<jsp:include page="signup.jsp"/>
 
 <script>
     $(document).ready(() => {
@@ -77,5 +78,13 @@
                 $('.login-form').submit();
             }
         });
+
+		$(".link-sign-up").on("click", () => {
+			$(".sign-up-modal").addClass("show");
+		});
+
+		$(document).delegate(".modal-close, .btn-cancel", "click", () => {
+			$(".modal-container").removeClass("show");
+		});
     });
 </script>
