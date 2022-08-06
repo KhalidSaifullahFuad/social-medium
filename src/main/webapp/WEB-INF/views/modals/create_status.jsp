@@ -12,22 +12,22 @@
         </div>
 
         <div class="modal-body">
+            <%--@elvariable id="status" type="com.fuad.entity.Status"--%>
             <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data">
 
                 <div class="post-header">
                     <div class="profile-photo">
-                        <img src="assets/images/profile.jpg" alt="profile thumb">
+                        <jsp:include page="../components/profile_photo.jsp" />
                     </div>
 
                     <div class="post-info">
-                        <div class="user-name">Khalid Saifullah Fuad</div>
+                        <div class="user-name">${user.getUsername()}</div>
 
                         <div class="user-info">
-                            <select name="privacy" id="">
-                                <option value="public">Public</option>
-                                <option value="connections">Connections</option>
-                                <option value="only-me">Only Me</option>
-                            </select>
+                            <form:select cssClass="dropdown" path="privacy">
+                                <form:option selected="true" value="Select Privacy" disabled="true"/>
+                                <form:options items="${privacyList}"/>
+                            </form:select>
                         </div>
                     </div>
                 </div>

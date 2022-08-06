@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="includes/taglib.jsp"/>
-<jsp:include page="includes/css.jsp"/>
+     <jsp:include page="includes/css.jsp"/>
 <jsp:include page="includes/js.jsp"/>
 
 <meta charset="UTF-8"/>
@@ -23,5 +22,5 @@
     </main>
 </div>
 
-<jsp:include page="modals/create_post.jsp"/>
+<jsp:include page="modals/create_status.jsp"/>
 <jsp:include page="auth/logout.jsp"/>

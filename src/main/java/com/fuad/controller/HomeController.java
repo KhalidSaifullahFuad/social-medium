@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -24,6 +24,8 @@ public class HomeController {
 
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("status", new StatusDto());
+        model.addAttribute("privacyList", getAllPrivacy());
+
         return "index";
     }
 
