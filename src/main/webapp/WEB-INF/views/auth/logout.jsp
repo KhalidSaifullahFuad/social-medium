@@ -12,9 +12,9 @@
         </div>
 
         <div class="modal-body">
-            <div>Do you want to Logout?</div>
+            <div>Do you want to Log Out?</div>
 
-            <form:form class="" method="post" action="${pageContext.request.contextPath}/logout">
+            <form:form action="${pageContext.request.contextPath}/auth/logout" method="post">
                 <div class="footer">
                     <button class="btn btn-cancel" type="reset">Cancel</button>
                     <button class="btn btn-logout" type="submit">Logout</button>

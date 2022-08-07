@@ -41,29 +41,29 @@ public class SecurityConfig {
                         // Permitting all static resources to be accessed publicly
                     .authorizeRequests()
                     .antMatchers("/images/**", "/css/**", "/js/**").permitAll()
-                    .antMatchers("/user/create", "/user/store").permitAll()
+                    .antMatchers("/auth/**").permitAll()
                         // We are restricting endpoints for individual roles.
                         // Only users with allowed roles will be able to access individual endpoints.
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/location/**").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/location/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
 
                         // configuring our login form
                 .and()
                     .formLogin(form -> form
-                            .loginPage("/login")
+                            .loginPage("/auth/login")
                             .permitAll()
                             .usernameParameter("username")
                             .passwordParameter("password")
-                            .loginProcessingUrl("/login-process")
+                            .loginProcessingUrl("/auth/login-process")
                             .successHandler(authSuccessHandler)
                             .permitAll()
                     )
 
                     .logout(logout -> logout
-                            .logoutUrl("/logout")
-                            .logoutSuccessUrl("/login?logout")
+                            .logoutUrl("/auth/logout")
+                            .logoutSuccessUrl("/auth/login?logout")
                             .permitAll()
                     )
                     .build();
