@@ -4,7 +4,6 @@ import com.fuad.config.Properties;
 import com.fuad.service.UserService;
 import com.fuad.util.FileUtils;
 import com.fuad.dao.AttachmentDAO;
-import com.fuad.dao.LocationDAO;
 import com.fuad.dao.StatusDAO;
 import com.fuad.entity.Attachment;
 import com.fuad.entity.Location;
@@ -18,16 +17,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Validated
 @Controller
 @RequestMapping("/status")
-@Validated
 public class StatusController extends BaseController {
 
     @Autowired
@@ -49,10 +49,11 @@ public class StatusController extends BaseController {
         return "status/create";
     }
 
+    @ResponseBody
     @PostMapping("/store")
     public String store(@Valid @ModelAttribute("status") StatusDto statusDto, BindingResult result, @RequestParam("images") MultipartFile[] files) throws IOException {
         if (result.hasErrors())
-            return "status/create";
+            return result.getFieldErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining("<br>"));
 
 
         List<Attachment> attachmentList = FileUtils.saveFiles(files, Properties.STATUS_FOLDER);
@@ -72,7 +73,7 @@ public class StatusController extends BaseController {
 
         statusDAO.save(status);
 
-        return "redirect:/status/show/" + status.getId();
+        return null;
     }
 
     @GetMapping(value = "/show/{id}")

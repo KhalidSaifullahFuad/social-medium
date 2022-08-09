@@ -38,6 +38,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                    .headers().frameOptions().sameOrigin()
+                .and()
                         // Permitting all static resources to be accessed publicly
                     .authorizeRequests()
                     .antMatchers("/images/**", "/css/**", "/js/**").permitAll()

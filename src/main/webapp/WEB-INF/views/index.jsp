@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-     <jsp:include page="includes/css.jsp"/>
+<jsp:include page="includes/css.jsp"/>
 <jsp:include page="includes/js.jsp"/>
 
 <meta charset="UTF-8"/>

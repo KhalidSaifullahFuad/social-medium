@@ -111,8 +111,6 @@
 
 }
 
-
-
 .post-photos{
     width: 100%;
     height: 100%;
@@ -130,6 +128,7 @@
 .post-photos:empty{
     display: none;
 }
+
 .post-photos img{
     width: 100%;
     height: 100%;
@@ -155,7 +154,6 @@
     box-shadow: 0 0 0 2px var(--color-border);
     border-radius: var(--border-radius);
 }
-
 
 .add-post-attachment i{
     color: var(--color-primary);
@@ -183,6 +181,8 @@ select {
     background: var(--color-border);
     border-radius: var(--border-radius);
     padding: 0.1rem 0.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
 }
 
 /* ----------------- Create Account ----------------- */
@@ -199,6 +199,11 @@ select {
 
 .sign-up-form input:focus{
     outline: 0.125rem solid var(--color-primary);
+}
+
+.sign-up-form input,
+.sign-up-form .btn{
+    margin-bottom: calc(var(--padding) - 1%);
 }
 
 

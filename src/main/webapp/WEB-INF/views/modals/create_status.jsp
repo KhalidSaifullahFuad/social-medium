@@ -12,8 +12,8 @@
         </div>
 
         <div class="modal-body">
-            <%--@elvariable id="status" type="com.fuad.entity.Status"--%>
-            <form:form action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data">
+            <%--@elvariable id="status" type="com.fuad.dto.StatusDto"--%>
+            <form:form cssClass="status-form" action="${pageContext.request.contextPath}/status/store" method="post" modelAttribute="status" enctype="multipart/form-data" target="dummy_frame">
 
                 <div class="post-header">
                     <div class="profile-photo">
@@ -25,8 +25,7 @@
 
                         <div class="user-info">
                             <form:select cssClass="dropdown" path="privacy">
-                                <form:option selected="true" value="Select Privacy" disabled="true"/>
-                                <form:options items="${privacyList}"/>
+                                <form:options items="${privacyList}" />
                             </form:select>
                         </div>
                     </div>
@@ -43,10 +42,11 @@
                         <input type="file" id="images" name="images" accept="image/*" multiple>
                     </div>
 
-                    <button type="submit" class="btn btn-post" >Post</button>
+                    <button type="submit" class="btn btn-post">Post</button>
                 </div>
 
             </form:form>
+            <iframe name="dummy_frame" id="dummy_frame" style="display: none"></iframe>
         </div>
     </div>
 </div>

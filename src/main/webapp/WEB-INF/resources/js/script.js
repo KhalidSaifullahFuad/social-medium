@@ -108,4 +108,53 @@ $(document).ready(function () {
     $("#logout").on("click", () => {
         $(".logout-modal").addClass("show");
     });
+
+    $(".btn-post").on("click", () => {
+        setTimeout(() => {
+            $(".modal-container").removeClass("show");
+            loadPage('status/all');
+        } , 300);
+    });
+/*
+    $(".btn-post").on("click", () => {
+        $(".status-form").submit();
+        // const action = getContextPath() + "status/store";
+        // console.log(action);
+        // $.ajax({
+        //     url: action,//$(".status-form").attr('action'),
+        //     type: "POST",
+        //     data: $('.status-form').serialize(),
+        //
+        //     success: (response) => {
+        //
+        //     }
+        // });
+    });
+
+    $(".status-form").on("submit", function (e) {
+        const action = $(".status-form").attr("action");
+        const dataString = $(this).serialize();
+        // const multipartData = new FormData();
+        //
+        // $.each($('#file')[0].files, function(i, file) {
+        //     multipartData.append('file-'+i, file);
+        // });
+
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: dataString,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function () {
+                // Display message back to the user here
+            }
+        });
+    });
+
+*/
+
 });
