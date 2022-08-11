@@ -61,6 +61,7 @@ public class BaseController {
 
         User user = new User();
         user.setName("admin");
+        user.setUsername("admin");
         user.setPassword("admin");
         user.setEmail("admin@gmail.com");
         user.setRole(Role.ROLE_ADMIN);

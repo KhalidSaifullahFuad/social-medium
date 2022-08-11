@@ -27,8 +27,8 @@ public class User implements Serializable, UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "handle")
-    private String handle;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "email")
     private String email;
@@ -75,7 +75,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return username;
     }
 
     @Override

@@ -60,10 +60,10 @@ public class UserDAO {
         return sessionFactory.getCurrentSession().load(User.class, id);
     }
 
-    public User findByHand(String handle) {
+    public User findByUsername(String username) {
         List<User> users = sessionFactory.getCurrentSession()
-                .createQuery("FROM User WHERE handle = :handle", User.class)
-                .setParameter("handle", handle.toLowerCase())
+                .createQuery("FROM User WHERE username = :username", User.class)
+                .setParameter("username", username.toLowerCase())
                 .getResultList();
         return users.size() > 0 ? users.get(0) : null;
     }

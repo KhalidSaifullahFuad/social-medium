@@ -8,8 +8,8 @@
     <div class="user card">
         <img class="user-cover-photo" src="${pageContext.request.contextPath}/images/banner.png" alt="cover photo">
         <img class="user-profile-photo" src="${userProfilePhoto}" alt="profile photo">
-        <h3 class="user-name">${user.getUsername()}</h3>
-        <div class="user-handle">@${user.getHandle()}</div>
+        <h3 class="user-name">${user.getName()}</h3>
+        <div class="user-handle">@${user.getUsername()}</div>
         <div class="headline"></div>
 
         <div class="profile-info">

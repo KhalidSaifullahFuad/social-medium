@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return username.contains("@") ? userDAO.findByEmail(username) : userDAO.findByHand(username);
+        return username.contains("@") ? userDAO.findByEmail(username) : userDAO.findByUsername(username);
     }
 
     public User getCurrentUser() {
@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserByHandle(String handle) {
-        return userDAO.findByHand(handle);
+        return userDAO.findByUsername(handle);
     }
 
 
@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
         String handle = userDto.getName().replaceAll("\\s+", "").toLowerCase();
         List<User> userList = userDAO.findByHandleLike(handle);
         if(userList.size() > 0) {
-            String existingHandle = userList.get(0).getHandle();
+            String existingHandle = userList.get(0).getUsername();
             String numberOnly= existingHandle.replaceAll("\\D", "");
             if(numberOnly.length() > 0) {
                 int number = Integer.parseInt(numberOnly) + 1;
@@ -78,7 +78,7 @@ public class UserService implements UserDetailsService {
             }
         }
 
-        user.setHandle(handle);
+        user.setUsername(handle);
 
         user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
